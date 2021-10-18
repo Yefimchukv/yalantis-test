@@ -1,5 +1,5 @@
 //
-//  AnswearVC.swift
+//  AnswerVC.swift
 //  YalantisTest
 //
 //  Created by Vitaliy Yefimchuk on 18.10.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AnswearVC: UIViewController {
+class AnswerVC: UIViewController {
     let containerView = UIView()
     let titleLabel = UILabel()
     let messageLabel = UILabel()
@@ -38,6 +38,7 @@ class AnswearVC: UIViewController {
         configureTitleLabel()
         configureActionButton()
         configureMessageLabel()
+        
     }
     
     // MARK: - Private helpers

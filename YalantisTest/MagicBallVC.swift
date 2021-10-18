@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MagicBallVC: UIViewController {
     
     let titleLabel = UILabel()
     let subtitleLable = UILabel()
@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         
         configureVC()
         configureLabels()
+        
     }
     
     override func becomeFirstResponder() -> Bool {
@@ -44,27 +45,43 @@ class ViewController: UIViewController {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             self.isShaking = false
-            self.presentAnswear()
+            NetworkService.shared.getAnswer { result in
+                switch result {
+                    
+                case .success(let answer):
+                    self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+                case .failure(let error):
+                    self.presentAnswer(title: "Oops", message: error.rawValue)
+                }
+            }
         }
     }
     
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             self.isShaking = false
-            self.presentAnswear()
+            NetworkService.shared.getAnswer { result in
+                switch result {
+                    
+                case .success(let answer):
+                    self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+                case .failure(let error):
+                    self.presentAnswer(title: "Oops", message: error.rawValue)
+                }
+            }
         }
     }
 
-    func presentAnswear() {
+    func presentAnswer(title: String?, message: String?) {
         DispatchQueue.main.async { [weak self] in
-            let alertVC = AnswearVC(title: "Title", message: "Here's Your answear", buttonTitle: "Ok")
+            guard let title = title, let message = message else { return }
+
+            let alertVC = AnswerVC(title: title, message: message, buttonTitle: "Ok")
             alertVC.modalPresentationStyle = .overFullScreen
             alertVC.modalTransitionStyle = .crossDissolve
             self?.present(alertVC, animated: true, completion: nil)
         }
     }
-    
-    
     
     // MARK: - Private helpers
     private func configureVC() {
