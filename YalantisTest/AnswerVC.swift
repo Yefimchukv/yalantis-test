@@ -19,6 +19,9 @@ class AnswerVC: UIViewController {
     
     let padding: CGFloat = 24
     
+    
+    
+    
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
         self.alertTitle = title
@@ -29,7 +32,7 @@ class AnswerVC: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
@@ -38,6 +41,11 @@ class AnswerVC: UIViewController {
         configureTitleLabel()
         configureActionButton()
         configureMessageLabel()
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
     }
     
@@ -146,5 +154,5 @@ class AnswerVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-   
+    
 }

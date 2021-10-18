@@ -12,7 +12,15 @@ class MagicBallVC: UIViewController {
     let titleLabel = UILabel()
     let subtitleLable = UILabel()
     
+    let defaults = UserDefaults.standard
+    
     var isShaking = false
+    
+    let straightPredictionsList: [Answer] = [
+        Answer(magic: Answer.Magic(question: "", answer: "Positive", type: "HELL YEAH!")),
+        Answer(magic: Answer.Magic(question: "", answer: "Negative", type: "NO WAY!")),
+        Answer(magic: Answer.Magic(question: "", answer: "Neutral", type: "50/50, it's on you"))
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,13 +53,18 @@ class MagicBallVC: UIViewController {
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             self.isShaking = false
-            NetworkService.shared.getAnswer { result in
-                switch result {
-                    
-                case .success(let answer):
-                    self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
-                case .failure(let error):
-                    self.presentAnswer(title: "Oops", message: error.rawValue)
+            if defaults.bool(forKey: "straightPredictions") {
+                let straightAnswer = straightPredictionsList.randomElement()
+                self.presentAnswer(title: straightAnswer?.magic.type, message: straightAnswer?.magic.answer)
+            } else {
+                NetworkService.shared.getAnswer { result in
+                    switch result {
+                        
+                    case .success(let answer):
+                        self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+                    case .failure(let error):
+                        self.presentAnswer(title: "Oops", message: error.rawValue)
+                    }
                 }
             }
         }
