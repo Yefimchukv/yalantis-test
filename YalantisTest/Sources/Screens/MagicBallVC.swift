@@ -26,12 +26,14 @@ class MagicBallVC: UIViewController {
         super.viewDidLoad()
         configureVC()
         configureLabels()
-        presentAnswer(title: "Ooops...", message: "I see bad connection... Try again later or try straight predictions")
+        defaults.removeObject(forKey: "lightTheme")
     }
+    
     
     override func becomeFirstResponder() -> Bool {
         return true
     }
+    
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
@@ -39,6 +41,7 @@ class MagicBallVC: UIViewController {
             
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
                 guard let self = self else { return }
+                
                 if self.isShaking {
                     let generator = UIImpactFeedbackGenerator(style: .medium)
                     generator.impactOccurred()
@@ -49,51 +52,60 @@ class MagicBallVC: UIViewController {
         }
     }
     
+    
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             handleMotion()
         }
     }
     
+    
     private func handleMotion() {
         self.isShaking = false
-        print(defaults.bool(forKey: "straightPredictions"))
-        if defaults.bool(forKey: "straightPredictions") {
+        print(defaults.bool(forKey: SettingKeys.straightPredictions))
+        if defaults.bool(forKey: SettingKeys.straightPredictions) {
             let straightAnswer = straightPredictionsList.randomElement()
             self.presentAnswer(title: straightAnswer?.magic.type, message: straightAnswer?.magic.answer)
         } else {
-            NetworkService.shared.getAnswer { result in
-                switch result {
-                case .success(let answer):
-                    self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
-                case .failure(let error):
-                    self.presentAnswer(title: "Oops", message: error.rawValue)
+            
+            Task {
+                do {
+                    let answer = try await NetworkService.shared.getAnswer()
+                    presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+                } catch {
+                    if let ytError = error as? YTError {
+                        presentAnswer(title: "Ooops...", message: ytError.rawValue)
+                    } else {
+                        presentAnswer(title: "Ooops...", message: "Something unkown happened")
+                    }
                 }
             }
         }
     }
+    
     
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             handleMotion()
         }
     }
-
+    
+    
     func presentAnswer(title: String?, message: String?) {
-        DispatchQueue.main.async { [weak self] in
-            guard let title = title, let message = message else { return }
-
-            let alertVC = AnswerVC(title: title, message: message, buttonTitle: "Ok")
-            alertVC.modalPresentationStyle = .overFullScreen
-            alertVC.modalTransitionStyle = .crossDissolve
-            self?.present(alertVC, animated: true, completion: nil)
-        }
+        guard let title = title, let message = message else { return }
+        
+        let alertVC = AnswerVC(title: title, message: message, buttonTitle: "Ok")
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        self.present(alertVC, animated: true, completion: nil)
     }
+    
     
     // MARK: - Private helpers
     private func configureVC() {
         view.backgroundColor = .systemBackground
     }
+    
     
     private func configureLabels() {
         titleLabel.text = "🔮"

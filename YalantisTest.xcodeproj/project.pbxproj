@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		851737E1271F0D2200126356 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E0271F0D2200126356 /* Constants.swift */; };
+		851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E5271F3C1200126356 /* YTTabBarController.swift */; };
+		851737EA271F42B900126356 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E9271F42B900126356 /* UIView+Ext.swift */; };
 		85354BB5271EFAB6003FCC9A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85354BB4271EFAB6003FCC9A /* Setting.swift */; };
 		85474949271DA1FF003F170F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474948271DA1FF003F170F /* AppDelegate.swift */; };
 		8547494B271DA1FF003F170F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547494A271DA1FF003F170F /* SceneDelegate.swift */; };
@@ -21,6 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		851737E0271F0D2200126356 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		851737E5271F3C1200126356 /* YTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarController.swift; sourceTree = "<group>"; };
+		851737E9271F42B900126356 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		85354BB4271EFAB6003FCC9A /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		85474945271DA1FF003F170F /* YalantisTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YalantisTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85474948271DA1FF003F170F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,18 +53,77 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		85354BB8271F0815003FCC9A /* Sources */ = {
+		851737DB271F0C2A00126356 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				85354BB4271EFAB6003FCC9A /* Setting.swift */,
+				85474966271DDAA8003F170F /* Answear.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		851737DC271F0C3700126356 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8547494C271DA1FF003F170F /* MagicBallVC.swift */,
+				8547495C271DB16E003F170F /* SettingsVC.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		851737DD271F0C5500126356 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				85474964271DD9A1003F170F /* NetworkService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		851737DE271F0C7400126356 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				851737E5271F3C1200126356 /* YTTabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		851737DF271F0C8A00126356 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
 				85474968271DDB80003F170F /* YTError.swift */,
 				85474948271DA1FF003F170F /* AppDelegate.swift */,
 				8547494A271DA1FF003F170F /* SceneDelegate.swift */,
-				8547494C271DA1FF003F170F /* MagicBallVC.swift */,
-				8547495C271DB16E003F170F /* SettingsVC.swift */,
+				851737E0271F0D2200126356 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		851737E7271F423300126356 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
 				85474962271DC45C003F170F /* AnswerVC.swift */,
-				85474964271DD9A1003F170F /* NetworkService.swift */,
-				85474966271DDAA8003F170F /* Answear.swift */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		851737E8271F42A100126356 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				851737E9271F42B900126356 /* UIView+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		85354BB8271F0815003FCC9A /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				851737E8271F42A100126356 /* Extensions */,
+				851737E7271F423300126356 /* Custom Views */,
+				851737DE271F0C7400126356 /* Controllers */,
+				851737DD271F0C5500126356 /* Services */,
+				851737DC271F0C3700126356 /* Screens */,
+				851737DB271F0C2A00126356 /* Model */,
+				851737DF271F0C8A00126356 /* Utilities */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -170,10 +235,13 @@
 			files = (
 				8547494D271DA1FF003F170F /* MagicBallVC.swift in Sources */,
 				85474967271DDAA8003F170F /* Answear.swift in Sources */,
+				851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */,
 				85474963271DC45C003F170F /* AnswerVC.swift in Sources */,
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
 				85474949271DA1FF003F170F /* AppDelegate.swift in Sources */,
+				851737E1271F0D2200126356 /* Constants.swift in Sources */,
 				85474965271DD9A1003F170F /* NetworkService.swift in Sources */,
+				851737EA271F42B900126356 /* UIView+Ext.swift in Sources */,
 				8547494B271DA1FF003F170F /* SceneDelegate.swift in Sources */,
 				85474969271DDB80003F170F /* YTError.swift in Sources */,
 				85354BB5271EFAB6003FCC9A /* Setting.swift in Sources */,

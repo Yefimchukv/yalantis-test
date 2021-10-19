@@ -10,6 +10,5 @@ import Foundation
 struct Setting {
     let name: String
     let defaultsKey: String
-    let isSwitch: Bool
-    
+    let hasSwitch: Bool
 }

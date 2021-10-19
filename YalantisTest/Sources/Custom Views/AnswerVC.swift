@@ -8,6 +8,7 @@
 import UIKit
 
 class AnswerVC: UIViewController {
+    
     let containerView = UIView()
     let titleLabel = UILabel()
     let messageLabel = UILabel()
@@ -32,8 +33,8 @@ class AnswerVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
-        
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        view.addSubviews(containerView, titleLabel, titleLabel, messageLabel, actionButton)
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
@@ -45,9 +46,12 @@ class AnswerVC: UIViewController {
         
     }
     
+    @objc func dismissVC() {
+        dismiss(animated: true, completion: nil)
+    }
+        
     // MARK: - Private helpers
     private func configureContainerView() {
-        view.addSubview(containerView)
         containerView.backgroundColor = .systemBackground
         containerView.layer.cornerRadius = 16
         containerView.layer.borderWidth = 2
@@ -73,8 +77,7 @@ class AnswerVC: UIViewController {
     private func configureTitleLabel() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        containerView.addSubview(titleLabel)
-        titleLabel.text = alertTitle ?? "Something went wrong"
+        titleLabel.text = alertTitle ?? "I'd just found the answer, but something went wrong"
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
@@ -98,8 +101,7 @@ class AnswerVC: UIViewController {
     private func configureMessageLabel() {
         messageLabel.textAlignment = .center
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(messageLabel)
-        messageLabel.text = message ?? "Error appeared, unable to complete request"
+        messageLabel.text = message ?? "Ooops, not this time"
         messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([
@@ -123,10 +125,14 @@ class AnswerVC: UIViewController {
     
     private func configureActionButton() {
         actionButton.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(actionButton)
-        actionButton.setTitle(buttonTitle ?? "Accept", for: .normal)
-        actionButton.backgroundColor = .systemPink
-        actionButton.layer.cornerRadius = 8
+        
+        actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
+        
+        actionButton.configuration = .borderedTinted()
+        actionButton.configuration?.cornerStyle = .medium
+        actionButton.configuration?.baseBackgroundColor = .systemPink
+        actionButton.configuration?.baseForegroundColor = .systemPink
+        
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
@@ -147,10 +153,4 @@ class AnswerVC: UIViewController {
             )
         ])
     }
-    
-    @objc private func dismissVC() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
 }
