@@ -17,10 +17,7 @@ class AnswerVC: UIViewController {
     var message: String?
     var buttonTitle: String?
     
-    let padding: CGFloat = 24
-    
-    
-    
+    let padding: CGFloat = 16
     
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
@@ -40,8 +37,7 @@ class AnswerVC: UIViewController {
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
-        configureMessageLabel()
-        
+        configureMessageLabel()   
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,6 +125,8 @@ class AnswerVC: UIViewController {
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(actionButton)
         actionButton.setTitle(buttonTitle ?? "Accept", for: .normal)
+        actionButton.backgroundColor = .systemPink
+        actionButton.layer.cornerRadius = 8
         actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
         
         NSLayoutConstraint.activate([

@@ -38,6 +38,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func createSettingsNC() -> UINavigationController {
         let settingsVC = SettingsVC()
+        settingsVC.title = "Settings"
         settingsVC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gearshape"), tag: 1)
         
         return UINavigationController(rootViewController: settingsVC)

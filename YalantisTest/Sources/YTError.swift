@@ -9,6 +9,6 @@ import Foundation
 
 enum YTError: String, Error {
     case urlError = "Can't get to the point..."
-    case internetIssue = "I see bad connection... Try again later"
+    case internetIssue = "I see bad connection... Try again later or try straight predictions"
     case decodeError = "I won't answer..."
 }

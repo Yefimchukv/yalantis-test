@@ -17,17 +17,16 @@ class MagicBallVC: UIViewController {
     var isShaking = false
     
     let straightPredictionsList: [Answer] = [
-        Answer(magic: Answer.Magic(question: "", answer: "Positive", type: "HELL YEAH!")),
-        Answer(magic: Answer.Magic(question: "", answer: "Negative", type: "NO WAY!")),
-        Answer(magic: Answer.Magic(question: "", answer: "Neutral", type: "50/50, it's on you"))
+        Answer(magic: Answer.Magic(question: "", answer: "HEAL YEAH!", type: "Positive")),
+        Answer(magic: Answer.Magic(question: "", answer: "NO WAY", type: "Negative")),
+        Answer(magic: Answer.Magic(question: "", answer: "50/50, it's up to you", type: "Neutral"))
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureVC()
         configureLabels()
-        
+        presentAnswer(title: "Ooops...", message: "I see bad connection... Try again later or try straight predictions")
     }
     
     override func becomeFirstResponder() -> Bool {
@@ -52,19 +51,23 @@ class MagicBallVC: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            self.isShaking = false
-            if defaults.bool(forKey: "straightPredictions") {
-                let straightAnswer = straightPredictionsList.randomElement()
-                self.presentAnswer(title: straightAnswer?.magic.type, message: straightAnswer?.magic.answer)
-            } else {
-                NetworkService.shared.getAnswer { result in
-                    switch result {
-                        
-                    case .success(let answer):
-                        self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
-                    case .failure(let error):
-                        self.presentAnswer(title: "Oops", message: error.rawValue)
-                    }
+            handleMotion()
+        }
+    }
+    
+    private func handleMotion() {
+        self.isShaking = false
+        print(defaults.bool(forKey: "straightPredictions"))
+        if defaults.bool(forKey: "straightPredictions") {
+            let straightAnswer = straightPredictionsList.randomElement()
+            self.presentAnswer(title: straightAnswer?.magic.type, message: straightAnswer?.magic.answer)
+        } else {
+            NetworkService.shared.getAnswer { result in
+                switch result {
+                case .success(let answer):
+                    self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+                case .failure(let error):
+                    self.presentAnswer(title: "Oops", message: error.rawValue)
                 }
             }
         }
@@ -72,16 +75,7 @@ class MagicBallVC: UIViewController {
     
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            self.isShaking = false
-            NetworkService.shared.getAnswer { result in
-                switch result {
-                    
-                case .success(let answer):
-                    self.presentAnswer(title: answer.magic.type, message: answer.magic.answer)
-                case .failure(let error):
-                    self.presentAnswer(title: "Oops", message: error.rawValue)
-                }
-            }
+            handleMotion()
         }
     }
 
@@ -115,7 +109,6 @@ class MagicBallVC: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
             
             subtitleLable.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             subtitleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 8),
