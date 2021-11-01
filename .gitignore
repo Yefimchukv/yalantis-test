@@ -1,14 +1,13 @@
-## User settings
-xcuserdata/
+# Mac OS X
+.DS_Store
 
-## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
-*.xcscmblueprint
-*.xccheckout
+# Xcode
 
-## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+## Build generated
 build/
-DerivedData/
-*.moved-aside
+DerivedData
+
+## Various settings
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -17,47 +16,27 @@ DerivedData/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+xcuserdata
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
-
-## App packaging
 *.ipa
-*.dSYM.zip
-*.dSYM
 
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
 
 # Swift Package Manager
-Packages/
-Package.pins
-Package.resolved
-*.xcodeproj
-
-.swiftpm
-
 .build/
 
-# CocoaPods
-Pods/
-*.xcworkspace
-
 # Carthage
-Carthage/Checkouts
-Carthage/Build/
+Carthage/Build
 
-# Accio dependency management
-Dependencies/
-.accio/
-
-# fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots/**/*.png
-fastlane/test_output
-
-# Code Injection
-
-iOSInjectionProject/
+# Cocoapods
+Pods/
