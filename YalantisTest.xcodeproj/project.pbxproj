@@ -21,9 +21,12 @@
 		85474965271DD9A1003F170F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474964271DD9A1003F170F /* NetworkService.swift */; };
 		85474967271DDAA8003F170F /* Answear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474966271DDAA8003F170F /* Answear.swift */; };
 		85474969271DDB80003F170F /* YTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474968271DDB80003F170F /* YTError.swift */; };
+		BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D107C6CAE40037AB394EB00 /* Pods-YalantisTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.debug.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.debug.xcconfig"; sourceTree = "<group>"; };
+		63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.release.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.release.xcconfig"; sourceTree = "<group>"; };
 		851737E0271F0D2200126356 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		851737E5271F3C1200126356 /* YTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarController.swift; sourceTree = "<group>"; };
 		851737E9271F42B900126356 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
@@ -40,6 +43,7 @@
 		85474964271DD9A1003F170F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		85474966271DDAA8003F170F /* Answear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answear.swift; sourceTree = "<group>"; };
 		85474968271DDB80003F170F /* YTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTError.swift; sourceTree = "<group>"; };
+		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,12 +51,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		64E6139395B3DDC0F841832D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		851737DB271F0C2A00126356 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +155,8 @@
 			children = (
 				85474947271DA1FF003F170F /* YalantisTest */,
 				85474946271DA1FF003F170F /* Products */,
+				AB8DAB5FADA52487CF2B46D3 /* Pods */,
+				64E6139395B3DDC0F841832D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -163,6 +178,16 @@
 			path = YalantisTest;
 			sourceTree = "<group>";
 		};
+		AB8DAB5FADA52487CF2B46D3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D107C6CAE40037AB394EB00 /* Pods-YalantisTest.debug.xcconfig */,
+				63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -170,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85474959271DA200003F170F /* Build configuration list for PBXNativeTarget "YalantisTest" */;
 			buildPhases = (
+				0C2C304D39411C3394940D27 /* [CP] Check Pods Manifest.lock */,
 				85474941271DA1FF003F170F /* Sources */,
 				85474942271DA1FF003F170F /* Frameworks */,
 				85474943271DA1FF003F170F /* Resources */,
+				357479180B3FB1F2EF0D21A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -227,6 +254,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C2C304D39411C3394940D27 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YalantisTest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		357479180B3FB1F2EF0D21A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		85474941271DA1FF003F170F /* Sources */ = {
@@ -380,6 +449,7 @@
 		};
 		8547495A271DA200003F170F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2D107C6CAE40037AB394EB00 /* Pods-YalantisTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -407,6 +477,7 @@
 		};
 		8547495B271DA200003F170F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

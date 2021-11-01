@@ -1,0 +1,6 @@
+framework module Pods_YalantisTest {
+  umbrella header "Pods-YalantisTest-umbrella.h"
+
+  export *
+  module * { export * }
+}
