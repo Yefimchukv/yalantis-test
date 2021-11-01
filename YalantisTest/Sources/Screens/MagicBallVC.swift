@@ -60,6 +60,13 @@ class MagicBallVC: UIViewController {
     }
     
     
+    override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            handleMotion()
+        }
+    }
+    
+    
     private func handleMotion() {
         self.isShaking = false
         print(defaults.bool(forKey: SettingKeys.straightPredictions))
@@ -80,13 +87,6 @@ class MagicBallVC: UIViewController {
                     }
                 }
             }
-        }
-    }
-    
-    
-    override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            handleMotion()
         }
     }
     
