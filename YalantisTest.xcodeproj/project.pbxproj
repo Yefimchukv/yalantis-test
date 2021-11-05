@@ -18,9 +18,10 @@
 		85474955271DA200003F170F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85474953271DA200003F170F /* LaunchScreen.storyboard */; };
 		8547495D271DB16E003F170F /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547495C271DB16E003F170F /* SettingsVC.swift */; };
 		85474963271DC45C003F170F /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474962271DC45C003F170F /* AnswerVC.swift */; };
-		85474965271DD9A1003F170F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474964271DD9A1003F170F /* NetworkService.swift */; };
+		85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474964271DD9A1003F170F /* NetworkStorageService.swift */; };
 		85474967271DDAA8003F170F /* Answear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474966271DDAA8003F170F /* Answear.swift */; };
 		85474969271DDB80003F170F /* YTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474968271DDB80003F170F /* YTError.swift */; };
+		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
 		BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,9 +41,10 @@
 		85474956271DA200003F170F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8547495C271DB16E003F170F /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		85474962271DC45C003F170F /* AnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
-		85474964271DD9A1003F170F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		85474964271DD9A1003F170F /* NetworkStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStorageService.swift; sourceTree = "<group>"; };
 		85474966271DDAA8003F170F /* Answear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answear.swift; sourceTree = "<group>"; };
 		85474968271DDB80003F170F /* YTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTError.swift; sourceTree = "<group>"; };
+		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,7 +89,8 @@
 		851737DD271F0C5500126356 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				85474964271DD9A1003F170F /* NetworkService.swift */,
+				85474964271DD9A1003F170F /* NetworkStorageService.swift */,
+				85B859D9273580F9006EA996 /* StorageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -184,7 +187,6 @@
 				2D107C6CAE40037AB394EB00 /* Pods-YalantisTest.debug.xcconfig */,
 				63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -309,7 +311,8 @@
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
 				85474949271DA1FF003F170F /* AppDelegate.swift in Sources */,
 				851737E1271F0D2200126356 /* Constants.swift in Sources */,
-				85474965271DD9A1003F170F /* NetworkService.swift in Sources */,
+				85B859DA273580F9006EA996 /* StorageService.swift in Sources */,
+				85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */,
 				851737EA271F42B900126356 /* UIView+Ext.swift in Sources */,
 				8547494B271DA1FF003F170F /* SceneDelegate.swift in Sources */,
 				85474969271DDB80003F170F /* YTError.swift in Sources */,
