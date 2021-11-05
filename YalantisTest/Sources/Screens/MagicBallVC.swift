@@ -16,19 +16,28 @@ class MagicBallVC: UIViewController {
     
     var isShaking = false
     
-    let straightPredictionsList: [Answer] = [
-        Answer(magic: Answer.Magic(question: "", answer: "HEAL YEAH!", type: "Positive")),
-        Answer(magic: Answer.Magic(question: "", answer: "NO WAY", type: "Negative")),
-        Answer(magic: Answer.Magic(question: "", answer: "50/50, it's up to you", type: "Neutral"))
-    ]
+    var answerService: AnswerProviderProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
         configureLabels()
-        defaults.removeObject(forKey: "lightTheme")
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if defaults.bool(forKey: SettingKeys.straightPredictions) {
+            setStorageService(StorageService())
+        } else {
+            setStorageService(NetworkStorageService())
+        }
+    }
+    
+    func setStorageService(_ answerService: AnswerProviderProtocol) {
+        self.answerService = answerService
+    }
     
     override func becomeFirstResponder() -> Bool {
         return true
@@ -69,22 +78,17 @@ class MagicBallVC: UIViewController {
     
     private func handleMotion() {
         self.isShaking = false
-        print(defaults.bool(forKey: SettingKeys.straightPredictions))
-        if defaults.bool(forKey: SettingKeys.straightPredictions) {
-            let straightAnswer = straightPredictionsList.randomElement()
-            self.presentAnswer(title: straightAnswer?.magic.type, message: straightAnswer?.magic.answer)
-        } else {
-            
-            Task {
-                do {
-                    let answer = try await NetworkService.shared.getAnswer()
-                    presentAnswer(title: answer.magic.type, message: answer.magic.answer)
-                } catch {
-                    if let ytError = error as? YTError {
-                        presentAnswer(title: "Ooops...", message: ytError.rawValue)
-                    } else {
-                        presentAnswer(title: "Ooops...", message: "Something unkown happened")
-                    }
+        
+        
+        Task {
+            do {
+                let answer = try await answerService.loadAnswer()
+                presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+            } catch {
+                if let ytError = error as? YTError {
+                    presentAnswer(title: "Ooops...", message: ytError.rawValue)
+                } else {
+                    presentAnswer(title: "Ooops...", message: "Something unkown happened")
                 }
             }
         }
@@ -115,8 +119,7 @@ class MagicBallVC: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLable.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(titleLabel)
-        view.addSubview(subtitleLable)
+        view.addSubviews(titleLabel, subtitleLable)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

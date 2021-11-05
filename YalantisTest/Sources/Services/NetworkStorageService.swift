@@ -7,17 +7,13 @@
 
 import Foundation
 
-class NetworkService {
-    
-    static let shared = NetworkService()
+class NetworkStorageService: AnswerProviderProtocol {
     
     private let endpoint = "https://8ball.delegator.com/magic/JSON/_"
     
     let decoder = JSONDecoder()
-    
-    private init() {}
 
-    func getAnswer() async throws -> Answer {
+    func loadAnswer() async throws -> Answer {
         guard let url = URL(string: endpoint) else {
             throw YTError.internetIssue
         }
