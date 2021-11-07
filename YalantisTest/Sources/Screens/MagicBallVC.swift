@@ -11,17 +11,20 @@ class MagicBallVC: UIViewController {
     
     private let titleLabel = UILabel()
     private let subtitleLable = UILabel()
-    
-    private let defaults = UserDefaults.standard
-    
     private var isShaking = false
     
     private var answerService: AnswerProviderProtocol!
+    private var dependencyManager: DependencyManaging!
     
-    func setStorageService(_ answerService: AnswerProviderProtocol) {
-        self.answerService = answerService
+    init(dependencyManager: DependencyManaging) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.dependencyManager = dependencyManager
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,8 @@ class MagicBallVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.answerService = dependencyManager.currentService
     }
     
     
@@ -77,8 +82,6 @@ class MagicBallVC: UIViewController {
         
         Task {
             do {
-                print(defaults.bool(forKey: SettingKeys.straightPredictions))
-                
                 let answer = try await answerService.loadAnswer()
                 presentAnswer(title: answer.magic.type, message: answer.magic.answer)
             } catch {
