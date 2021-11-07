@@ -9,14 +9,19 @@ import UIKit
 
 class MagicBallVC: UIViewController {
     
-    let titleLabel = UILabel()
-    let subtitleLable = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLable = UILabel()
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     
-    var isShaking = false
+    private var isShaking = false
     
-    var answerService: AnswerProviderProtocol!
+    private var answerService: AnswerProviderProtocol!
+    
+    func setStorageService(_ answerService: AnswerProviderProtocol) {
+        self.answerService = answerService
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +32,8 @@ class MagicBallVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if defaults.bool(forKey: SettingKeys.straightPredictions) {
-            setStorageService(StorageService())
-        } else {
-            setStorageService(NetworkStorageService())
-        }
     }
     
-    func setStorageService(_ answerService: AnswerProviderProtocol) {
-        self.answerService = answerService
-    }
     
     override func becomeFirstResponder() -> Bool {
         return true
@@ -79,9 +75,10 @@ class MagicBallVC: UIViewController {
     private func handleMotion() {
         self.isShaking = false
         
-        
         Task {
             do {
+                print(defaults.bool(forKey: SettingKeys.straightPredictions))
+                
                 let answer = try await answerService.loadAnswer()
                 presentAnswer(title: answer.magic.type, message: answer.magic.answer)
             } catch {
@@ -95,7 +92,7 @@ class MagicBallVC: UIViewController {
     }
     
     
-    func presentAnswer(title: String?, message: String?) {
+    private func presentAnswer(title: String?, message: String?) {
         guard let title = title, let message = message else { return }
         
         let alertVC = AnswerVC(title: title, message: message, buttonTitle: "Ok")
@@ -108,6 +105,7 @@ class MagicBallVC: UIViewController {
     // MARK: - Private helpers
     private func configureVC() {
         view.backgroundColor = .systemBackground
+        
     }
     
     

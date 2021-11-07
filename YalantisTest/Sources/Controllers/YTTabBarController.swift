@@ -8,6 +8,8 @@
 import UIKit
 
 class YTTabBarController: UITabBarController {
+    
+    private let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,17 +19,23 @@ class YTTabBarController: UITabBarController {
     }
     
     
-    func createMagicBallNC() -> UINavigationController {
-        let searchVC = MagicBallVC()
-        searchVC.tabBarItem = UITabBarItem(title: "Magic Ball",
+    private func createMagicBallNC() -> UINavigationController {
+        let magicBallVC = MagicBallVC()
+        magicBallVC.tabBarItem = UITabBarItem(title: "Magic Ball",
                                            image: SFSymbols.questionmark,
                                            tag: 0)
         
-        return UINavigationController(rootViewController: searchVC)
+        if defaults.bool(forKey: SettingKeys.straightPredictions) {
+            magicBallVC.setStorageService(StorageService())
+        } else {
+            magicBallVC.setStorageService(NetworkStorageService())
+        }
+        
+        return UINavigationController(rootViewController: magicBallVC)
     }
     
     
-    func createSettingsNC() -> UINavigationController {
+    private func createSettingsNC() -> UINavigationController {
         let settingsVC = SettingsVC()
         settingsVC.title = "Settings"
         settingsVC.tabBarItem = UITabBarItem(title: "Settings",
