@@ -11,7 +11,7 @@ class NetworkStorageService: AnswerProviderProtocol {
     
     private let endpoint = "https://8ball.delegator.com/magic/JSON/_"
     
-    let decoder = JSONDecoder()
+    private let decoder = JSONDecoder()
 
     func loadAnswer() async throws -> Answer {
         guard let url = URL(string: endpoint) else {

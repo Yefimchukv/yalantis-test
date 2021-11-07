@@ -17,7 +17,7 @@ class StorageService: AnswerProviderProtocol {
     
     func loadAnswer() async throws -> Answer {
         hardcodedAnswers = [
-            Answer(magic: Answer.Magic(question: "", answer: "HEAL YEAH!", type: "Positive")),
+            Answer(magic: Answer.Magic(question: "", answer: "HELL YEAH!", type: "Positive")),
             Answer(magic: Answer.Magic(question: "", answer: "NO WAY", type: "Negative")),
             Answer(magic: Answer.Magic(question: "", answer: "50/50, it's up to you", type: "Neutral"))
         ]

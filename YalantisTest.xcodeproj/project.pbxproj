@@ -21,6 +21,7 @@
 		85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474964271DD9A1003F170F /* NetworkStorageService.swift */; };
 		85474967271DDAA8003F170F /* Answear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474966271DDAA8003F170F /* Answear.swift */; };
 		85474969271DDB80003F170F /* YTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474968271DDB80003F170F /* YTError.swift */; };
+		85767EE6273840AE007435A6 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85767EE5273840AE007435A6 /* DependencyManager.swift */; };
 		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
 		BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		85474964271DD9A1003F170F /* NetworkStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStorageService.swift; sourceTree = "<group>"; };
 		85474966271DDAA8003F170F /* Answear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answear.swift; sourceTree = "<group>"; };
 		85474968271DDB80003F170F /* YTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTError.swift; sourceTree = "<group>"; };
+		85767EE5273840AE007435A6 /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 			children = (
 				85474964271DD9A1003F170F /* NetworkStorageService.swift */,
 				85B859D9273580F9006EA996 /* StorageService.swift */,
+				85767EE5273840AE007435A6 /* DependencyManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				85474963271DC45C003F170F /* AnswerVC.swift in Sources */,
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
 				85474949271DA1FF003F170F /* AppDelegate.swift in Sources */,
+				85767EE6273840AE007435A6 /* DependencyManager.swift in Sources */,
 				851737E1271F0D2200126356 /* Constants.swift in Sources */,
 				85B859DA273580F9006EA996 /* StorageService.swift in Sources */,
 				85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */,

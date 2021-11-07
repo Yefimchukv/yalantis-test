@@ -9,14 +9,22 @@ import UIKit
 
 class MagicBallVC: UIViewController {
     
-    let titleLabel = UILabel()
-    let subtitleLable = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLable = UILabel()
+    private var isShaking = false
     
-    let defaults = UserDefaults.standard
+    private var answerService: AnswerProviderProtocol!
+    private var dependencyManager: DependencyManaging!
     
-    var isShaking = false
+    init(dependencyManager: DependencyManaging) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.dependencyManager = dependencyManager
+    }
     
-    var answerService: AnswerProviderProtocol!
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,16 +36,9 @@ class MagicBallVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if defaults.bool(forKey: SettingKeys.straightPredictions) {
-            setStorageService(StorageService())
-        } else {
-            setStorageService(NetworkStorageService())
-        }
+        self.answerService = dependencyManager.currentService
     }
     
-    func setStorageService(_ answerService: AnswerProviderProtocol) {
-        self.answerService = answerService
-    }
     
     override func becomeFirstResponder() -> Bool {
         return true
@@ -79,7 +80,6 @@ class MagicBallVC: UIViewController {
     private func handleMotion() {
         self.isShaking = false
         
-        
         Task {
             do {
                 let answer = try await answerService.loadAnswer()
@@ -95,7 +95,7 @@ class MagicBallVC: UIViewController {
     }
     
     
-    func presentAnswer(title: String?, message: String?) {
+    private func presentAnswer(title: String?, message: String?) {
         guard let title = title, let message = message else { return }
         
         let alertVC = AnswerVC(title: title, message: message, buttonTitle: "Ok")
@@ -108,6 +108,7 @@ class MagicBallVC: UIViewController {
     // MARK: - Private helpers
     private func configureVC() {
         view.backgroundColor = .systemBackground
+        
     }
     
     

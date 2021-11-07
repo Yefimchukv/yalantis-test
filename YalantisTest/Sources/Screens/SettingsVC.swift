@@ -9,11 +9,11 @@ import UIKit
 
 class SettingsVC: UIViewController {
     
-    var tableView = UITableView()
+    private var tableView = UITableView()
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     
-    let settingsList: [Setting] = [
+    private let settingsList: [Setting] = [
         Setting(name: SettingNames.straightPredictions,
                 defaultsKey: SettingKeys.straightPredictions,
                 hasSwitch: true),
