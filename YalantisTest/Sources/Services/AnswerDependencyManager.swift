@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol DependencyManaging {
+protocol DependencyManagerProtocol {
     var storageService: AnswerProviderProtocol! { get }
     
     var currentService: AnswerProviderProtocol { get }
 }
 
-class DependencyManager: DependencyManaging {
+class AnswerDependencyManager: DependencyManagerProtocol {
     
     var storageService: AnswerProviderProtocol!
     
