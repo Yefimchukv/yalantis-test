@@ -8,7 +8,7 @@
 import UIKit
 
 class YTTabBarController: UITabBarController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -17,17 +17,18 @@ class YTTabBarController: UITabBarController {
     }
     
     
-    func createMagicBallNC() -> UINavigationController {
-        let searchVC = MagicBallVC()
-        searchVC.tabBarItem = UITabBarItem(title: "Magic Ball",
-                                           image: SFSymbols.questionmark,
-                                           tag: 0)
+    private func createMagicBallNC() -> UINavigationController {
+        let magicBallVC = MagicBallVC(answerDependencyManager: AnswerDependencyManager())
         
-        return UINavigationController(rootViewController: searchVC)
+        magicBallVC.tabBarItem = UITabBarItem(title: "Magic Ball",
+                                              image: SFSymbols.questionmark,
+                                              tag: 0)
+        
+        return UINavigationController(rootViewController: magicBallVC)
     }
     
     
-    func createSettingsNC() -> UINavigationController {
+    private func createSettingsNC() -> UINavigationController {
         let settingsVC = SettingsVC()
         settingsVC.title = "Settings"
         settingsVC.tabBarItem = UITabBarItem(title: "Settings",

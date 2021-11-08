@@ -9,24 +9,34 @@ import UIKit
 
 class MagicBallVC: UIViewController {
     
-    let titleLabel = UILabel()
-    let subtitleLable = UILabel()
+    private let titleLabel = UILabel()
+    private let subtitleLable = UILabel()
+    private var isShaking = false
     
-    let defaults = UserDefaults.standard
+    private var answerService: AnswerProviderProtocol!
+    private var answerDependencyManager: DependencyManagerProtocol!
     
-    var isShaking = false
+    init(answerDependencyManager: DependencyManagerProtocol) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.answerDependencyManager = answerDependencyManager
+    }
     
-    let straightPredictionsList: [Answer] = [
-        Answer(magic: Answer.Magic(question: "", answer: "HEAL YEAH!", type: "Positive")),
-        Answer(magic: Answer.Magic(question: "", answer: "NO WAY", type: "Negative")),
-        Answer(magic: Answer.Magic(question: "", answer: "50/50, it's up to you", type: "Neutral"))
-    ]
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
         configureLabels()
-        defaults.removeObject(forKey: "lightTheme")
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.answerService = answerDependencyManager.currentService
     }
     
     
@@ -69,29 +79,23 @@ class MagicBallVC: UIViewController {
     
     private func handleMotion() {
         self.isShaking = false
-        print(defaults.bool(forKey: SettingKeys.straightPredictions))
-        if defaults.bool(forKey: SettingKeys.straightPredictions) {
-            let straightAnswer = straightPredictionsList.randomElement()
-            self.presentAnswer(title: straightAnswer?.magic.type, message: straightAnswer?.magic.answer)
-        } else {
-            
-            Task {
-                do {
-                    let answer = try await NetworkService.shared.getAnswer()
-                    presentAnswer(title: answer.magic.type, message: answer.magic.answer)
-                } catch {
-                    if let ytError = error as? YTError {
-                        presentAnswer(title: "Ooops...", message: ytError.rawValue)
-                    } else {
-                        presentAnswer(title: "Ooops...", message: "Something unkown happened")
-                    }
+        
+        Task {
+            do {
+                let answer = try await answerService.loadAnswer()
+                presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+            } catch {
+                if let ytError = error as? YTError {
+                    presentAnswer(title: "Ooops...", message: ytError.rawValue)
+                } else {
+                    presentAnswer(title: "Ooops...", message: "Something unkown happened")
                 }
             }
         }
     }
     
     
-    func presentAnswer(title: String?, message: String?) {
+    private func presentAnswer(title: String?, message: String?) {
         guard let title = title, let message = message else { return }
         
         let alertVC = AnswerVC(title: title, message: message, buttonTitle: "Ok")
@@ -104,6 +108,7 @@ class MagicBallVC: UIViewController {
     // MARK: - Private helpers
     private func configureVC() {
         view.backgroundColor = .systemBackground
+        
     }
     
     
@@ -115,8 +120,7 @@ class MagicBallVC: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLable.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(titleLabel)
-        view.addSubview(subtitleLable)
+        view.addSubviews(titleLabel, subtitleLable)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),

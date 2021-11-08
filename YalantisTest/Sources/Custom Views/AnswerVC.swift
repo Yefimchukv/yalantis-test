@@ -9,16 +9,16 @@ import UIKit
 
 class AnswerVC: UIViewController {
     
-    let containerView = UIView()
-    let titleLabel = UILabel()
-    let messageLabel = UILabel()
-    let actionButton = UIButton()
+    private let containerView = UIView()
+    private let titleLabel = UILabel()
+    private let messageLabel = UILabel()
+    private let actionButton = UIButton()
     
-    var alertTitle: String?
-    var message: String?
-    var buttonTitle: String?
+    private var alertTitle: String?
+    private var message: String?
+    private var buttonTitle: String?
     
-    let padding: CGFloat = 16
+    private let padding: CGFloat = 16
     
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
@@ -46,7 +46,7 @@ class AnswerVC: UIViewController {
         
     }
     
-    @objc func dismissVC() {
+    @objc private func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
         
