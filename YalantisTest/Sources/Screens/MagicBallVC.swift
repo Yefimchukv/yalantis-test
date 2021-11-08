@@ -14,12 +14,12 @@ class MagicBallVC: UIViewController {
     private var isShaking = false
     
     private var answerService: AnswerProviderProtocol!
-    private var dependencyManager: DependencyManaging!
+    private var answerDependencyManager: DependencyManagerProtocol!
     
-    init(dependencyManager: DependencyManaging) {
+    init(answerDependencyManager: DependencyManagerProtocol) {
         super.init(nibName: nil, bundle: nil)
         
-        self.dependencyManager = dependencyManager
+        self.answerDependencyManager = answerDependencyManager
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +36,7 @@ class MagicBallVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.answerService = dependencyManager.currentService
+        self.answerService = answerDependencyManager.currentService
     }
     
     

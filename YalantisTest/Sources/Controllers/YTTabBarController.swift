@@ -9,8 +9,6 @@ import UIKit
 
 class YTTabBarController: UITabBarController {
     
-    private let defaults = UserDefaults.standard
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +18,7 @@ class YTTabBarController: UITabBarController {
     
     
     private func createMagicBallNC() -> UINavigationController {
-        let magicBallVC = MagicBallVC(dependencyManager: DependencyManager())
+        let magicBallVC = MagicBallVC(answerDependencyManager: AnswerDependencyManager())
         
         magicBallVC.tabBarItem = UITabBarItem(title: "Magic Ball",
                                               image: SFSymbols.questionmark,
