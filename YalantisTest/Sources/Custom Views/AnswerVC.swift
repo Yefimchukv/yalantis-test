@@ -70,7 +70,7 @@ class AnswerVC: UIViewController {
             ),
             containerView.widthAnchor.constraint(
                 equalToConstant: 280
-            ),
+            )
         ])
     }
     

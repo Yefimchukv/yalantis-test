@@ -32,18 +32,15 @@ class MagicBallVC: UIViewController {
         configureLabels()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.answerService = answerDependencyManager.currentService
     }
     
-    
     override func becomeFirstResponder() -> Bool {
         return true
     }
-    
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
@@ -62,20 +59,17 @@ class MagicBallVC: UIViewController {
         }
     }
     
-    
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             handleMotion()
         }
     }
     
-    
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             handleMotion()
         }
     }
-    
     
     private func handleMotion() {
         self.isShaking = false
@@ -94,7 +88,6 @@ class MagicBallVC: UIViewController {
         }
     }
     
-    
     private func presentAnswer(title: String?, message: String?) {
         guard let title = title, let message = message else { return }
         
@@ -104,13 +97,11 @@ class MagicBallVC: UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     
-    
     // MARK: - Private helpers
     private func configureVC() {
         view.backgroundColor = .systemBackground
         
     }
-    
     
     private func configureLabels() {
         titleLabel.text = "🔮"
@@ -127,8 +118,7 @@ class MagicBallVC: UIViewController {
             titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             subtitleLable.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            subtitleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 8),
+            subtitleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 8)
         ])
     }
 }
-
