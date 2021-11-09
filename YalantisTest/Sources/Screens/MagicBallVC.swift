@@ -104,9 +104,9 @@ class MagicBallVC: UIViewController {
     }
     
     private func configureLabels() {
-        titleLabel.text = "🔮"
+        titleLabel.text = L10n.Localizable.MagicBall.title
         titleLabel.textAlignment = .center
-        subtitleLable.text = "Shake Your iPhone to ask the GURU"
+        subtitleLable.text = L10n.Localizable.MagicBall.subtitle
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLable.translatesAutoresizingMaskIntoConstraints = false
