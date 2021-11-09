@@ -6,6 +6,6 @@ target 'YalantisTest' do
   use_frameworks!
 
   # Pods for YalantisTest
-  pod 'Alamofire', '~> 5.4'
+  pod 'SwiftLint'
 
 end

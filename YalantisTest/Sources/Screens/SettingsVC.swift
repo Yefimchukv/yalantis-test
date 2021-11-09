@@ -16,7 +16,7 @@ class SettingsVC: UIViewController {
     private let settingsList: [Setting] = [
         Setting(name: SettingNames.straightPredictions,
                 defaultsKey: SettingKeys.straightPredictions,
-                hasSwitch: true),
+                hasSwitch: true)
     ]
     
     override func viewDidLoad() {
@@ -25,7 +25,6 @@ class SettingsVC: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         configureTableView()
     }
-    
     
     private func configureTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
@@ -42,7 +41,6 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settingsList.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.settingsCell, for: indexPath)
@@ -63,11 +61,9 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
     @objc private func toggleSwitch(sender: UISwitch) {
         defaults.set(sender.isOn, forKey: settingsList[sender.tag].defaultsKey)
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

@@ -200,11 +200,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85474959271DA200003F170F /* Build configuration list for PBXNativeTarget "YalantisTest" */;
 			buildPhases = (
+				85CE0424273A975F00354E1B /* ShellScript */,
 				0C2C304D39411C3394940D27 /* [CP] Check Pods Manifest.lock */,
 				85474941271DA1FF003F170F /* Sources */,
 				85474942271DA1FF003F170F /* Frameworks */,
 				85474943271DA1FF003F170F /* Resources */,
-				357479180B3FB1F2EF0D21A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -283,22 +283,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		357479180B3FB1F2EF0D21A0 /* [CP] Embed Pods Frameworks */ = {
+		85CE0424273A975F00354E1B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

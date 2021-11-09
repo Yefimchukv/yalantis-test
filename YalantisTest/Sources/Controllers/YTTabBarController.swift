@@ -16,7 +16,6 @@ class YTTabBarController: UITabBarController {
         viewControllers = [createMagicBallNC(), createSettingsNC()]
     }
     
-    
     private func createMagicBallNC() -> UINavigationController {
         let magicBallVC = MagicBallVC(answerDependencyManager: AnswerDependencyManager())
         
@@ -26,8 +25,7 @@ class YTTabBarController: UITabBarController {
         
         return UINavigationController(rootViewController: magicBallVC)
     }
-    
-    
+        
     private func createSettingsNC() -> UINavigationController {
         let settingsVC = SettingsVC()
         settingsVC.title = "Settings"
