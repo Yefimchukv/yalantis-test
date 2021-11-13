@@ -26,7 +26,6 @@
 		85CE0429273AA74800354E1B /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0427273AA74800354E1B /* strings.swift */; };
 		85CE042A273AA74800354E1B /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0428273AA74800354E1B /* assets.swift */; };
 		85CE0431273AACF700354E1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85CE042F273AACF700354E1B /* Localizable.strings */; };
-		85CE0436273AAF6C00354E1B /* Constants.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85CE0434273AAF6C00354E1B /* Constants.strings */; };
 		BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 		85CE0427273AA74800354E1B /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 		85CE0428273AA74800354E1B /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
 		85CE0430273AACF700354E1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		85CE0435273AAF6C00354E1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Constants.strings; sourceTree = "<group>"; };
 		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -162,7 +160,6 @@
 				85474951271DA200003F170F /* Assets.xcassets */,
 				85474953271DA200003F170F /* LaunchScreen.storyboard */,
 				85CE042F273AACF700354E1B /* Localizable.strings */,
-				85CE0434273AAF6C00354E1B /* Constants.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -276,7 +273,6 @@
 			files = (
 				85474955271DA200003F170F /* LaunchScreen.storyboard in Resources */,
 				85CE0431273AACF700354E1B /* Localizable.strings in Resources */,
-				85CE0436273AAF6C00354E1B /* Constants.strings in Resources */,
 				85474952271DA200003F170F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,14 +381,6 @@
 				85CE0430273AACF700354E1B /* Base */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		85CE0434273AAF6C00354E1B /* Constants.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				85CE0435273AAF6C00354E1B /* Base */,
-			);
-			name = Constants.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
