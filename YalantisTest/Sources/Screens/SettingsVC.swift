@@ -14,8 +14,8 @@ class SettingsVC: UIViewController {
     private let defaults = UserDefaults.standard
     
     private let settingsList: [Setting] = [
-        Setting(name: L10n.Constants.SettingsName.straightPredictions,
-                defaultsKey: L10n.Constants.SettingsKey.straightPredictions,
+        Setting(name: L10n.SettingsName.straightPredictions,
+                defaultsKey: L10n.SettingsKey.straightPredictions,
                 hasSwitch: true)
     ]
     
@@ -32,7 +32,7 @@ class SettingsVC: UIViewController {
         tableView.dataSource = self
         view.addSubview(tableView)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.Constants.Cells.settingsCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.Cells.settingsCell)
     }
 }
 
@@ -43,7 +43,7 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.Constants.Cells.settingsCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.Cells.settingsCell, for: indexPath)
         
         if settingsList[indexPath.row].hasSwitch {
             let cellSwitch = UISwitch(frame: .zero)

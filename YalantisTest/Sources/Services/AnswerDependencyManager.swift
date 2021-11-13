@@ -18,7 +18,7 @@ class AnswerDependencyManager: DependencyManagerProtocol {
     var storageService: AnswerProviderProtocol!
     
     var currentService: AnswerProviderProtocol {
-        if !UserDefaults.standard.bool(forKey: L10n.Constants.SettingsKey.straightPredictions) {
+        if !UserDefaults.standard.bool(forKey: L10n.SettingsKey.straightPredictions) {
             storageService = NetworkStorageService()
             return storageService
         } else {
