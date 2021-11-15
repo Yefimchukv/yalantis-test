@@ -14,9 +14,9 @@ class SettingsVC: UIViewController {
     private let defaults = UserDefaults.standard
     
     private let settingsList: [Setting] = [
-        Setting(name: SettingNames.straightPredictions,
-                defaultsKey: SettingKeys.straightPredictions,
-                hasSwitch: true),
+        Setting(name: L10n.SettingsName.straightPredictions,
+                defaultsKey: L10n.SettingsKey.straightPredictions,
+                hasSwitch: true)
     ]
     
     override func viewDidLoad() {
@@ -26,14 +26,13 @@ class SettingsVC: UIViewController {
         configureTableView()
     }
     
-    
     private func configureTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Cells.settingsCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.Cells.settingsCell)
     }
 }
 
@@ -43,9 +42,8 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
         return settingsList.count
     }
     
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.settingsCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.Cells.settingsCell, for: indexPath)
         
         if settingsList[indexPath.row].hasSwitch {
             let cellSwitch = UISwitch(frame: .zero)
@@ -63,11 +61,9 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
     @objc private func toggleSwitch(sender: UISwitch) {
         defaults.set(sender.isOn, forKey: settingsList[sender.tag].defaultsKey)
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

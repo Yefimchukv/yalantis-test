@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		851737E1271F0D2200126356 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E0271F0D2200126356 /* Constants.swift */; };
+		851737E1271F0D2200126356 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E0271F0D2200126356 /* SFSymbols.swift */; };
 		851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E5271F3C1200126356 /* YTTabBarController.swift */; };
 		851737EA271F42B900126356 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E9271F42B900126356 /* UIView+Ext.swift */; };
 		85354BB5271EFAB6003FCC9A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85354BB4271EFAB6003FCC9A /* Setting.swift */; };
@@ -23,13 +23,16 @@
 		85474969271DDB80003F170F /* YTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474968271DDB80003F170F /* YTError.swift */; };
 		85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */; };
 		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
+		85CE0429273AA74800354E1B /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0427273AA74800354E1B /* strings.swift */; };
+		85CE042A273AA74800354E1B /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0428273AA74800354E1B /* assets.swift */; };
+		85CE0431273AACF700354E1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85CE042F273AACF700354E1B /* Localizable.strings */; };
 		BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2D107C6CAE40037AB394EB00 /* Pods-YalantisTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.debug.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.debug.xcconfig"; sourceTree = "<group>"; };
 		63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.release.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.release.xcconfig"; sourceTree = "<group>"; };
-		851737E0271F0D2200126356 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		851737E0271F0D2200126356 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
 		851737E5271F3C1200126356 /* YTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarController.swift; sourceTree = "<group>"; };
 		851737E9271F42B900126356 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		85354BB4271EFAB6003FCC9A /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
@@ -47,6 +50,9 @@
 		85474968271DDB80003F170F /* YTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTError.swift; sourceTree = "<group>"; };
 		85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDependencyManager.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		85CE0427273AA74800354E1B /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
+		85CE0428273AA74800354E1B /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
+		85CE0430273AACF700354E1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -112,7 +118,7 @@
 				85474968271DDB80003F170F /* YTError.swift */,
 				85474948271DA1FF003F170F /* AppDelegate.swift */,
 				8547494A271DA1FF003F170F /* SceneDelegate.swift */,
-				851737E0271F0D2200126356 /* Constants.swift */,
+				851737E0271F0D2200126356 /* SFSymbols.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -147,13 +153,15 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		85354BB9271F0821003FCC9A /* Recources */ = {
+		85354BB9271F0821003FCC9A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				85CE0426273AA61000354E1B /* SwiftGen */,
 				85474951271DA200003F170F /* Assets.xcassets */,
 				85474953271DA200003F170F /* LaunchScreen.storyboard */,
+				85CE042F273AACF700354E1B /* Localizable.strings */,
 			);
-			path = Recources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8547493C271DA1FF003F170F = {
@@ -178,10 +186,19 @@
 			isa = PBXGroup;
 			children = (
 				85354BB8271F0815003FCC9A /* Sources */,
-				85354BB9271F0821003FCC9A /* Recources */,
+				85354BB9271F0821003FCC9A /* Resources */,
 				85474956271DA200003F170F /* Info.plist */,
 			);
 			path = YalantisTest;
+			sourceTree = "<group>";
+		};
+		85CE0426273AA61000354E1B /* SwiftGen */ = {
+			isa = PBXGroup;
+			children = (
+				85CE0428273AA74800354E1B /* assets.swift */,
+				85CE0427273AA74800354E1B /* strings.swift */,
+			);
+			path = SwiftGen;
 			sourceTree = "<group>";
 		};
 		AB8DAB5FADA52487CF2B46D3 /* Pods */ = {
@@ -201,10 +218,11 @@
 			buildConfigurationList = 85474959271DA200003F170F /* Build configuration list for PBXNativeTarget "YalantisTest" */;
 			buildPhases = (
 				0C2C304D39411C3394940D27 /* [CP] Check Pods Manifest.lock */,
+				85CE0424273A975F00354E1B /* SwiftLint */,
 				85474941271DA1FF003F170F /* Sources */,
 				85474942271DA1FF003F170F /* Frameworks */,
 				85474943271DA1FF003F170F /* Resources */,
-				357479180B3FB1F2EF0D21A0 /* [CP] Embed Pods Frameworks */,
+				85CE0425273AA33300354E1B /* SwiftGen */,
 			);
 			buildRules = (
 			);
@@ -254,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85474955271DA200003F170F /* LaunchScreen.storyboard in Resources */,
+				85CE0431273AACF700354E1B /* Localizable.strings in Resources */,
 				85474952271DA200003F170F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,22 +302,41 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		357479180B3FB1F2EF0D21A0 /* [CP] Embed Pods Frameworks */ = {
+		85CE0424273A975F00354E1B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+			);
+			name = SwiftLint;
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		85CE0425273AA33300354E1B /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -314,8 +352,10 @@
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
 				85474949271DA1FF003F170F /* AppDelegate.swift in Sources */,
 				85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */,
-				851737E1271F0D2200126356 /* Constants.swift in Sources */,
+				85CE0429273AA74800354E1B /* strings.swift in Sources */,
+				851737E1271F0D2200126356 /* SFSymbols.swift in Sources */,
 				85B859DA273580F9006EA996 /* StorageService.swift in Sources */,
+				85CE042A273AA74800354E1B /* assets.swift in Sources */,
 				85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */,
 				851737EA271F42B900126356 /* UIView+Ext.swift in Sources */,
 				8547494B271DA1FF003F170F /* SceneDelegate.swift in Sources */,
@@ -333,6 +373,14 @@
 				85474954271DA200003F170F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		85CE042F273AACF700354E1B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85CE0430273AACF700354E1B /* Base */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

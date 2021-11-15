@@ -1,0 +1,11 @@
+strings:
+  inputs: YalantisTest/Resources/Base.lproj
+  outputs:
+    - templateName: structured-swift5
+      output: YalantisTest/Resources/SwiftGen/strings.swift
+xcassets:
+  inputs:
+    - YalantisTest/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      output: YalantisTest/Resources/SwiftGen/assets.swift
