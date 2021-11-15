@@ -17,7 +17,7 @@ class YTTabBarController: UITabBarController {
     }
     
     private func createMagicBallNC() -> UINavigationController {
-        let magicBallVC = MagicBallVC(answerDependencyManager: AnswerDependencyManager())
+        let magicBallVC = MagicBallVC(viewModel: BallViewModel())
         
         magicBallVC.tabBarItem = UITabBarItem(title: L10n.Titles.magicBall,
                                               image: SFSymbols.questionmark,
