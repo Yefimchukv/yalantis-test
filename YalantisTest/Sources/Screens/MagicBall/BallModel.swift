@@ -23,7 +23,7 @@ class BallModel {
         self.answerProvider = answerDependencyManager.currentService
     }
     
-    func fetchAnswer() async throws -> Answer? {
+    func fetchAnswer() async throws -> Answer {
         let answer = try await answerProvider.loadAnswer()
         return answer.toAnswer()
     }

@@ -13,7 +13,7 @@ class BallViewModel {
     
     func fetchAnswer() async throws -> PresentableAnswer {
         let answerModel = try await model.fetchAnswer()
-        return answerModel!.toPresentableAnswer()
+        return answerModel.toPresentableAnswer()
     }
     
     func refreshAnswerProvider() {

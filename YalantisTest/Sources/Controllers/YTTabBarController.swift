@@ -27,7 +27,7 @@ class YTTabBarController: UITabBarController {
     }
         
     private func createSettingsNC() -> UINavigationController {
-        let settingsVC = SettingsVC()
+        let settingsVC = SettingsVC(viewModel: SettingsViewModel())
         settingsVC.title = L10n.Titles.settings
         settingsVC.tabBarItem = UITabBarItem(title: L10n.Titles.settings,
                                              image: SFSymbols.gearshape,
