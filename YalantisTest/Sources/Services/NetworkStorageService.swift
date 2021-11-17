@@ -13,7 +13,7 @@ class NetworkStorageService: AnswerProviderProtocol {
     
     private let decoder = JSONDecoder()
 
-    func loadAnswer() async throws -> Answer {
+    func loadAnswer() async throws -> ManagedAnswer {
         guard let url = URL(string: endpoint) else {
             throw YTError.internetIssue
         }
@@ -25,7 +25,7 @@ class NetworkStorageService: AnswerProviderProtocol {
         }
         
         do {
-            return try decoder.decode(Answer.self, from: data)
+            return try decoder.decode(ManagedAnswer.self, from: data)
         } catch {
             throw YTError.decodeError
         }

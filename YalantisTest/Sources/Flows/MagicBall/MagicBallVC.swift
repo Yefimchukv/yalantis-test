@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MagicBallVC.swift
 //  YalantisTest
 //
 //  Created by Vitaliy Yefimchuk on 18.10.2021.
@@ -13,13 +13,11 @@ class MagicBallVC: UIViewController {
     private let subtitleLable = UILabel()
     private var isShaking = false
     
-    private var answerService: AnswerProviderProtocol!
-    private var answerDependencyManager: DependencyManagerProtocol!
+    private var viewModel: BallViewModel!
     
-    init(answerDependencyManager: DependencyManagerProtocol) {
+    init(viewModel: BallViewModel) {
         super.init(nibName: nil, bundle: nil)
-        
-        self.answerDependencyManager = answerDependencyManager
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +33,7 @@ class MagicBallVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.answerService = answerDependencyManager.currentService
+        viewModel.refreshAnswerProvider()
     }
     
     override func becomeFirstResponder() -> Bool {
@@ -76,13 +74,15 @@ class MagicBallVC: UIViewController {
         
         Task {
             do {
-                let answer = try await answerService.loadAnswer()
-                presentAnswer(title: answer.magic.type, message: answer.magic.answer)
+                let answer = try await viewModel.fetchAnswer()
+                presentAnswer(title: answer.answerTitle, message: answer.answerSubtitle)
             } catch {
                 if let ytError = error as? YTError {
-                    presentAnswer(title: "Ooops...", message: ytError.rawValue)
+                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
+                                  message: ytError.rawValue)
                 } else {
-                    presentAnswer(title: "Ooops...", message: "Something unkown happened")
+                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
+                                  message: L10n.Errors.UltimateUnknownError.message)
                 }
             }
         }

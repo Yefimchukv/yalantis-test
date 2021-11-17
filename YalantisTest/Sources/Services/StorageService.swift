@@ -7,19 +7,17 @@
 
 import Foundation
 
-protocol AnswerProviderProtocol {
-    func loadAnswer() async throws -> Answer
-}
-
 class StorageService: AnswerProviderProtocol {
     
-    private var hardcodedAnswers: [Answer] = []
+    private var hardcodedAnswers: [ManagedAnswer] = []
     
-    func loadAnswer() async throws -> Answer {
+    func loadAnswer() async throws -> ManagedAnswer {
+        
+        // Gonna be some DB calls in further
         hardcodedAnswers = [
-            Answer(magic: Answer.Magic(question: "", answer: "HELL YEAH!", type: "Positive")),
-            Answer(magic: Answer.Magic(question: "", answer: "NO WAY", type: "Negative")),
-            Answer(magic: Answer.Magic(question: "", answer: "50/50, it's up to you", type: "Neutral"))
+            ManagedAnswer(magic: ManagedAnswer.Magic(question: "", answer: "HELL YEAH!", type: "Positive")),
+            ManagedAnswer(magic: ManagedAnswer.Magic(question: "", answer: "NO WAY", type: "Negative")),
+            ManagedAnswer(magic: ManagedAnswer.Magic(question: "", answer: "50/50, it's up to you", type: "Neutral"))
         ]
         
         return hardcodedAnswers.randomElement()!

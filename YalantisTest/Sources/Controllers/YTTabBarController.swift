@@ -17,7 +17,10 @@ class YTTabBarController: UITabBarController {
     }
     
     private func createMagicBallNC() -> UINavigationController {
-        let magicBallVC = MagicBallVC(answerDependencyManager: AnswerDependencyManager())
+        let dependencyManager = AnswerDependencyManager()
+        let model = BallModel(answerDependencyManager: dependencyManager)
+        let viewModel = BallViewModel(model: model)
+        let magicBallVC = MagicBallVC(viewModel: viewModel)
         
         magicBallVC.tabBarItem = UITabBarItem(title: L10n.Titles.magicBall,
                                               image: SFSymbols.questionmark,
@@ -27,7 +30,10 @@ class YTTabBarController: UITabBarController {
     }
         
     private func createSettingsNC() -> UINavigationController {
-        let settingsVC = SettingsVC()
+        let settingsProvider = SettingsService()
+        let model = SettingsModel(settingsProvider: settingsProvider)
+        let viewModel = SettingsViewModel(model: model)
+        let settingsVC = SettingsVC(viewModel: viewModel)
         settingsVC.title = L10n.Titles.settings
         settingsVC.tabBarItem = UITabBarItem(title: L10n.Titles.settings,
                                              image: SFSymbols.gearshape,
