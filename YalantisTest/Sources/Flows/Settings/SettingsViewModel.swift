@@ -7,11 +7,11 @@
 
 import Foundation
 
-class SettingsViewModel {
+final class SettingsViewModel {
     private let model: SettingsModel
     
-    init() {
-        self.model = SettingsModel()
+    init(model: SettingsModel) {
+        self.model = model
     }
     
     func loadSettings() {

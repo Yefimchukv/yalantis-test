@@ -106,6 +106,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		851659B62745326400EE61B9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		851737DB271F0C2A00126356 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,13 +123,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		851737DC271F0C3700126356 /* Screens */ = {
+		851737DC271F0C3700126356 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
 				85002C15274182FB007A12BA /* Settings */,
 				85002C14274182CD007A12BA /* MagicBall */,
 			);
-			path = Screens;
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		851737DD271F0C5500126356 /* Services */ = {
@@ -129,7 +137,6 @@
 			children = (
 				85474964271DD9A1003F170F /* NetworkStorageService.swift */,
 				85B859D9273580F9006EA996 /* StorageService.swift */,
-				85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */,
 				85219CCD27443DD300633196 /* SettingsService.swift */,
 			);
 			path = Services;
@@ -173,11 +180,12 @@
 		85354BB8271F0815003FCC9A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				851659B62745326400EE61B9 /* Managers */,
 				851737E8271F42A100126356 /* Extensions */,
 				851737E7271F423300126356 /* Custom Views */,
 				851737DE271F0C7400126356 /* Controllers */,
 				851737DD271F0C5500126356 /* Services */,
-				851737DC271F0C3700126356 /* Screens */,
+				851737DC271F0C3700126356 /* Flows */,
 				851737DB271F0C2A00126356 /* Model */,
 				851737DF271F0C8A00126356 /* Utilities */,
 			);

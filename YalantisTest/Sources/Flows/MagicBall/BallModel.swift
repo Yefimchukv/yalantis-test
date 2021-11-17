@@ -7,15 +7,15 @@
 
 import Foundation
 
-class BallModel {
+final class BallModel {
     
     /// Manages network/local services
-    private var answerDependencyManager: DependencyManagerProtocol
+    private let answerDependencyManager: DependencyManagerProtocol
     /// Service that provides answer
     private var answerProvider: AnswerProviderProtocol
     
-    init() {
-        self.answerDependencyManager = AnswerDependencyManager()
+    init(answerDependencyManager: DependencyManagerProtocol) {
+        self.answerDependencyManager = answerDependencyManager
         self.answerProvider = self.answerDependencyManager.currentService
     }
     

@@ -12,6 +12,8 @@ class StorageService: AnswerProviderProtocol {
     private var hardcodedAnswers: [ManagedAnswer] = []
     
     func loadAnswer() async throws -> ManagedAnswer {
+        
+        // Gonna be some DB calls in further
         hardcodedAnswers = [
             ManagedAnswer(magic: ManagedAnswer.Magic(question: "", answer: "HELL YEAH!", type: "Positive")),
             ManagedAnswer(magic: ManagedAnswer.Magic(question: "", answer: "NO WAY", type: "Negative")),

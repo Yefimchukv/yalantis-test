@@ -16,6 +16,16 @@ internal enum L10n {
     internal static let settingsCell = L10n.tr("Localizable", "cells.settingsCell")
   }
 
+  internal enum Errors {
+    internal enum UltimateUnknownError {
+      /// Something unknown happened. It really happens not often.
+      ///  Congratulations!
+      internal static let message = L10n.tr("Localizable", "errors.ultimateUnknownError.message")
+      /// Ooops...
+      internal static let title = L10n.tr("Localizable", "errors.ultimateUnknownError.title")
+    }
+  }
+
   internal enum MagicBall {
     /// Shake Your iPhone to ask the GURU
     internal static let subtitle = L10n.tr("Localizable", "magicBall.subtitle")

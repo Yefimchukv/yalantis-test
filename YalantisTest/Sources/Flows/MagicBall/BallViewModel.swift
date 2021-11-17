@@ -7,9 +7,13 @@
 
 import Foundation
 
-class BallViewModel {
+final class BallViewModel {
     
-    private let model = BallModel()
+    private let model: BallModel
+    
+    init(model: BallModel) {
+        self.model = model
+    }
     
     func fetchAnswer() async throws -> PresentableAnswer {
         let answerModel = try await model.fetchAnswer()

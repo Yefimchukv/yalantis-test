@@ -7,13 +7,13 @@
 
 import Foundation
 
-class SettingsModel {
-    private var settingsProvider: SettingsServiceProtocol
+final class SettingsModel {
+    private let settingsProvider: SettingsServiceProtocol
     
     private var settings: [Setting] = []
     
-    init() {
-        self.settingsProvider = SettingsService()
+    init(settingsProvider: SettingsServiceProtocol) {
+        self.settingsProvider = settingsProvider
     }
     
     func loadSettings() {

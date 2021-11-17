@@ -78,9 +78,11 @@ class MagicBallVC: UIViewController {
                 presentAnswer(title: answer.answerTitle, message: answer.answerSubtitle)
             } catch {
                 if let ytError = error as? YTError {
-                    presentAnswer(title: "Ooops...", message: ytError.rawValue)
+                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
+                                  message: ytError.rawValue)
                 } else {
-                    presentAnswer(title: "Ooops...", message: "Something unknown happened")
+                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
+                                  message: L10n.Errors.UltimateUnknownError.message)
                 }
             }
         }

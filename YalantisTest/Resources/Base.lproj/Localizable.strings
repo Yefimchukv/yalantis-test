@@ -9,3 +9,6 @@
 "settingsKey.straightPredictions"  = "straightPredictions";
 
 "cells.settingsCell" = "settingsCell";
+
+"errors.ultimateUnknownError.title" = "Ooops...";
+"errors.ultimateUnknownError.message" = "Something unknown happened. It really happens not often.\n Congratulations!";
