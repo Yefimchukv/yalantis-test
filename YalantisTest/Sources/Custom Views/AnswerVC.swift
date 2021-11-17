@@ -34,7 +34,9 @@ class AnswerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
+        
         view.addSubviews(containerView, titleLabel, titleLabel, messageLabel, actionButton)
+        
         configureContainerView()
         configureTitleLabel()
         configureActionButton()
@@ -49,14 +51,17 @@ class AnswerVC: UIViewController {
     @objc private func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
-        
-    // MARK: - Private helpers
-    private func configureContainerView() {
+}
+
+// MARK: - Private configures and constraints
+private extension AnswerVC {
+    
+    func configureContainerView() {
         containerView.backgroundColor = .systemBackground
-        containerView.layer.cornerRadius = 16
-        containerView.layer.borderWidth = 2
         containerView.layer.borderColor = UIColor.white.cgColor
         containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.layer.cornerRadius = 16
+        containerView.layer.borderWidth = 2
         
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(
@@ -74,10 +79,10 @@ class AnswerVC: UIViewController {
         ])
     }
     
-    private func configureTitleLabel() {
+    func configureTitleLabel() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
-        titleLabel.text = alertTitle ?? "I'd just found the answer, but something went wrong"
+        titleLabel.text = alertTitle ?? L10n.Errors.UltimateUnknownError.title
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(
@@ -98,10 +103,10 @@ class AnswerVC: UIViewController {
         ])
     }
     
-    private func configureMessageLabel() {
+    func configureMessageLabel() {
         messageLabel.textAlignment = .center
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.text = message ?? "Ooops, not this time"
+        messageLabel.text = message ?? L10n.Errors.UltimateUnknownError.message
         messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([
@@ -123,11 +128,9 @@ class AnswerVC: UIViewController {
         ])
     }
     
-    private func configureActionButton() {
+    func configureActionButton() {
         actionButton.translatesAutoresizingMaskIntoConstraints = false
-        
         actionButton.setTitle(buttonTitle ?? "Ok", for: .normal)
-        
         actionButton.configuration = .borderedTinted()
         actionButton.configuration?.cornerStyle = .medium
         actionButton.configuration?.baseBackgroundColor = .systemPink

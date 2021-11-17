@@ -26,20 +26,10 @@ class SettingsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.prefersLargeTitles = true
+        configureVC()
         configureTableView()
         
         viewModel.loadSettings()
-    }
-    
-    private func configureTableView() {
-        tableView = UITableView(frame: view.bounds, style: .insetGrouped)
-        tableView.delegate = self
-        tableView.dataSource = self
-        view.addSubview(tableView)
-        
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.Cells.settingsCell)
     }
 }
 
@@ -76,5 +66,23 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - Private configures and constraints
+private extension SettingsVC {
+    
+    func configureVC() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func configureTableView() {
+        tableView = UITableView(frame: view.bounds, style: .insetGrouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        view.addSubview(tableView)
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.Cells.settingsCell)
     }
 }
