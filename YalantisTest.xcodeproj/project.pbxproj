@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85002C172741831C007A12BA /* BallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85002C162741831C007A12BA /* BallModel.swift */; };
 		851737E1271F0D2200126356 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E0271F0D2200126356 /* SFSymbols.swift */; };
 		851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E5271F3C1200126356 /* YTTabBarController.swift */; };
 		851737EA271F42B900126356 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E9271F42B900126356 /* UIView+Ext.swift */; };
+		85219CCA27443DB400633196 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85219CC927443DB400633196 /* SettingsViewModel.swift */; };
+		85219CCC27443DBD00633196 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85219CCB27443DBD00633196 /* SettingsModel.swift */; };
+		85219CCE27443DD300633196 /* SettingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85219CCD27443DD300633196 /* SettingsService.swift */; };
 		85354BB5271EFAB6003FCC9A /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85354BB4271EFAB6003FCC9A /* Setting.swift */; };
+		8542B11727406526004CB3C1 /* BallViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8542B11627406526004CB3C1 /* BallViewModel.swift */; };
 		85474949271DA1FF003F170F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474948271DA1FF003F170F /* AppDelegate.swift */; };
 		8547494B271DA1FF003F170F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547494A271DA1FF003F170F /* SceneDelegate.swift */; };
 		8547494D271DA1FF003F170F /* MagicBallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547494C271DA1FF003F170F /* MagicBallVC.swift */; };
@@ -19,7 +24,7 @@
 		8547495D271DB16E003F170F /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8547495C271DB16E003F170F /* SettingsVC.swift */; };
 		85474963271DC45C003F170F /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474962271DC45C003F170F /* AnswerVC.swift */; };
 		85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474964271DD9A1003F170F /* NetworkStorageService.swift */; };
-		85474967271DDAA8003F170F /* Answear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474966271DDAA8003F170F /* Answear.swift */; };
+		85474967271DDAA8003F170F /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474966271DDAA8003F170F /* Answer.swift */; };
 		85474969271DDB80003F170F /* YTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474968271DDB80003F170F /* YTError.swift */; };
 		85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */; };
 		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
@@ -32,10 +37,15 @@
 /* Begin PBXFileReference section */
 		2D107C6CAE40037AB394EB00 /* Pods-YalantisTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.debug.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.debug.xcconfig"; sourceTree = "<group>"; };
 		63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.release.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.release.xcconfig"; sourceTree = "<group>"; };
+		85002C162741831C007A12BA /* BallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallModel.swift; sourceTree = "<group>"; };
 		851737E0271F0D2200126356 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
 		851737E5271F3C1200126356 /* YTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarController.swift; sourceTree = "<group>"; };
 		851737E9271F42B900126356 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		85219CC927443DB400633196 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		85219CCB27443DBD00633196 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		85219CCD27443DD300633196 /* SettingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsService.swift; sourceTree = "<group>"; };
 		85354BB4271EFAB6003FCC9A /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		8542B11627406526004CB3C1 /* BallViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallViewModel.swift; sourceTree = "<group>"; };
 		85474945271DA1FF003F170F /* YalantisTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YalantisTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85474948271DA1FF003F170F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8547494A271DA1FF003F170F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +56,7 @@
 		8547495C271DB16E003F170F /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		85474962271DC45C003F170F /* AnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
 		85474964271DD9A1003F170F /* NetworkStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStorageService.swift; sourceTree = "<group>"; };
-		85474966271DDAA8003F170F /* Answear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answear.swift; sourceTree = "<group>"; };
+		85474966271DDAA8003F170F /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		85474968271DDB80003F170F /* YTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTError.swift; sourceTree = "<group>"; };
 		85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDependencyManager.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
@@ -76,22 +86,50 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		85002C14274182CD007A12BA /* MagicBall */ = {
+			isa = PBXGroup;
+			children = (
+				8547494C271DA1FF003F170F /* MagicBallVC.swift */,
+				8542B11627406526004CB3C1 /* BallViewModel.swift */,
+				85002C162741831C007A12BA /* BallModel.swift */,
+			);
+			path = MagicBall;
+			sourceTree = "<group>";
+		};
+		85002C15274182FB007A12BA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8547495C271DB16E003F170F /* SettingsVC.swift */,
+				85219CC927443DB400633196 /* SettingsViewModel.swift */,
+				85219CCB27443DBD00633196 /* SettingsModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		851659B62745326400EE61B9 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		851737DB271F0C2A00126356 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				85354BB4271EFAB6003FCC9A /* Setting.swift */,
-				85474966271DDAA8003F170F /* Answear.swift */,
+				85474966271DDAA8003F170F /* Answer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		851737DC271F0C3700126356 /* Screens */ = {
+		851737DC271F0C3700126356 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				8547494C271DA1FF003F170F /* MagicBallVC.swift */,
-				8547495C271DB16E003F170F /* SettingsVC.swift */,
+				85002C15274182FB007A12BA /* Settings */,
+				85002C14274182CD007A12BA /* MagicBall */,
 			);
-			path = Screens;
+			path = Flows;
 			sourceTree = "<group>";
 		};
 		851737DD271F0C5500126356 /* Services */ = {
@@ -99,7 +137,7 @@
 			children = (
 				85474964271DD9A1003F170F /* NetworkStorageService.swift */,
 				85B859D9273580F9006EA996 /* StorageService.swift */,
-				85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */,
+				85219CCD27443DD300633196 /* SettingsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -142,11 +180,12 @@
 		85354BB8271F0815003FCC9A /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				851659B62745326400EE61B9 /* Managers */,
 				851737E8271F42A100126356 /* Extensions */,
 				851737E7271F423300126356 /* Custom Views */,
 				851737DE271F0C7400126356 /* Controllers */,
 				851737DD271F0C5500126356 /* Services */,
-				851737DC271F0C3700126356 /* Screens */,
+				851737DC271F0C3700126356 /* Flows */,
 				851737DB271F0C2A00126356 /* Model */,
 				851737DF271F0C8A00126356 /* Utilities */,
 			);
@@ -346,18 +385,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				8547494D271DA1FF003F170F /* MagicBallVC.swift in Sources */,
-				85474967271DDAA8003F170F /* Answear.swift in Sources */,
+				85474967271DDAA8003F170F /* Answer.swift in Sources */,
 				851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */,
 				85474963271DC45C003F170F /* AnswerVC.swift in Sources */,
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
+				85219CCA27443DB400633196 /* SettingsViewModel.swift in Sources */,
 				85474949271DA1FF003F170F /* AppDelegate.swift in Sources */,
 				85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */,
 				85CE0429273AA74800354E1B /* strings.swift in Sources */,
 				851737E1271F0D2200126356 /* SFSymbols.swift in Sources */,
 				85B859DA273580F9006EA996 /* StorageService.swift in Sources */,
 				85CE042A273AA74800354E1B /* assets.swift in Sources */,
+				85219CCE27443DD300633196 /* SettingsService.swift in Sources */,
 				85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */,
+				85002C172741831C007A12BA /* BallModel.swift in Sources */,
 				851737EA271F42B900126356 /* UIView+Ext.swift in Sources */,
+				8542B11727406526004CB3C1 /* BallViewModel.swift in Sources */,
+				85219CCC27443DBD00633196 /* SettingsModel.swift in Sources */,
 				8547494B271DA1FF003F170F /* SceneDelegate.swift in Sources */,
 				85474969271DDB80003F170F /* YTError.swift in Sources */,
 				85354BB5271EFAB6003FCC9A /* Setting.swift in Sources */,

@@ -7,6 +7,10 @@
 
 import Foundation
 
+protocol AnswerProviderProtocol {
+    func loadAnswer() async throws -> ManagedAnswer
+}
+
 protocol DependencyManagerProtocol {
     var storageService: AnswerProviderProtocol! { get }
     
