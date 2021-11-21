@@ -96,14 +96,17 @@ class MagicBallVC: UIViewController {
         alertVC.modalTransitionStyle = .crossDissolve
         self.present(alertVC, animated: true, completion: nil)
     }
+}
+
+// MARK: - Private configures and constraints
+private extension MagicBallVC {
     
-    // MARK: - Private helpers
-    private func configureVC() {
+    func configureVC() {
         view.backgroundColor = .systemBackground
         
     }
     
-    private func configureLabels() {
+    func configureLabels() {
         titleLabel.text = L10n.MagicBall.title
         titleLabel.textAlignment = .center
         subtitleLable.text = L10n.MagicBall.subtitle
