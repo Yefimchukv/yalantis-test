@@ -34,10 +34,8 @@ internal enum L10n {
   }
 
   internal enum Keychain {
-    internal enum Keys {
-      /// counterKey
-      internal static let predictionsCounter = L10n.tr("Localizable", "keychain.keys.predictionsCounter")
-    }
+    /// counterKey
+    internal static let predictionsCounter = L10n.tr("Localizable", "keychain.predictionsCounter")
   }
 
   internal enum MagicBall {

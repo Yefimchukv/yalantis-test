@@ -4,7 +4,7 @@
 "counter.title" = "Total predictions: ";
 "counter.btn" = "Reset";
 
-"keychain.keys.predictionsCounter" = "counterKey";
+"keychain.predictionsCounter" = "counterKey";
 
 "magicBall.title" = "🔮";
 "magicBall.subtitle" = "Shake Your iPhone to ask the GURU";

@@ -81,8 +81,8 @@ class MagicBallVC: UIViewController {
         Task {
             do {
                 let answer = try await viewModel.fetchAnswer()
-                let currentCount = viewModel.loadValue(with: L10n.Keychain.Keys.predictionsCounter).value
-                viewModel.saveValue(of: currentCount, with: L10n.Keychain.Keys.predictionsCounter)
+                let currentCount = viewModel.loadValue(with: L10n.Keychain.predictionsCounter).value
+                viewModel.saveValue(of: currentCount, with: L10n.Keychain.predictionsCounter)
                 updateCounter()
                 
                 presentAnswer(title: answer.answerTitle, message: answer.answerSubtitle)
@@ -100,12 +100,18 @@ class MagicBallVC: UIViewController {
     }
     
     @objc private func resetCounter() {
-        viewModel.resetValue(with: L10n.Keychain.Keys.predictionsCounter)
+        viewModel.resetValue(with: L10n.Keychain.predictionsCounter)
         updateCounter()
     }
     
     private func updateCounter() {
-        counterTitle.text = L10n.Counter.title + "\(viewModel.loadValue(with: L10n.Keychain.Keys.predictionsCounter).value)"
+        let currentPredictionsNumber = viewModel.loadValue(with: L10n.Keychain.predictionsCounter).value
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.counterTitle.text = L10n.Counter.title + "\(currentPredictionsNumber)"
+        }
     }
     
     private func presentAnswer(title: String?, message: String?) {
@@ -126,7 +132,7 @@ private extension MagicBallVC {
     }
     
     func setCounter() {
-        counterTitle.text = L10n.Counter.title + "\(viewModel.loadValue(with: L10n.Keychain.Keys.predictionsCounter).value)"
+        counterTitle.text = L10n.Counter.title + "\(viewModel.loadValue(with: L10n.Keychain.predictionsCounter).value)"
         counterTitle.adjustsFontSizeToFitWidth = true
         counterTitle.translatesAutoresizingMaskIntoConstraints = false
         
