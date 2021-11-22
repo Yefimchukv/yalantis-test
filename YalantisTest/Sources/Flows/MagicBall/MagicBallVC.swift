@@ -9,8 +9,12 @@ import UIKit
 
 class MagicBallVC: UIViewController {
     
+    private let counterTitle = UILabel()
+    private let counterResetBtn = UIButton()
+    
     private let titleLabel = UILabel()
     private let subtitleLable = UILabel()
+    
     private var isShaking = false
     
     private var viewModel: BallViewModel!
@@ -27,7 +31,9 @@ class MagicBallVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
-        configureLabels()
+        configureTitle()
+        setCounter()
+        configureCounter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +81,12 @@ class MagicBallVC: UIViewController {
         Task {
             do {
                 let answer = try await viewModel.fetchAnswer()
+                let currentCount = viewModel.loadValue(with: L10n.Keychain.Keys.predictionsCounter).value
+                viewModel.saveValue(of: currentCount, with: L10n.Keychain.Keys.predictionsCounter)
+                updateCounter()
+                
                 presentAnswer(title: answer.answerTitle, message: answer.answerSubtitle)
+                
             } catch {
                 if let ytError = error as? YTError {
                     presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
@@ -86,6 +97,15 @@ class MagicBallVC: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc private func resetCounter() {
+        viewModel.resetValue(with: L10n.Keychain.Keys.predictionsCounter)
+        updateCounter()
+    }
+    
+    private func updateCounter() {
+        counterTitle.text = L10n.Counter.title + "\(viewModel.loadValue(with: L10n.Keychain.Keys.predictionsCounter).value)"
     }
     
     private func presentAnswer(title: String?, message: String?) {
@@ -103,12 +123,45 @@ private extension MagicBallVC {
     
     func configureVC() {
         view.backgroundColor = .systemBackground
-        
     }
     
-    func configureLabels() {
+    func setCounter() {
+        counterTitle.text = L10n.Counter.title + "\(viewModel.loadValue(with: L10n.Keychain.Keys.predictionsCounter).value)"
+        counterTitle.adjustsFontSizeToFitWidth = true
+        counterTitle.translatesAutoresizingMaskIntoConstraints = false
+        
+        counterResetBtn.configuration?.buttonSize = .small
+        counterResetBtn.configuration = .borderedTinted()
+        counterResetBtn.configuration?.cornerStyle = .medium
+        counterResetBtn.configuration?.baseForegroundColor = .systemCyan
+        counterResetBtn.configuration?.baseBackgroundColor = .systemMint
+        counterResetBtn.configuration?.title = L10n.Counter.btn
+        counterResetBtn.translatesAutoresizingMaskIntoConstraints = false
+        
+        counterResetBtn.addTarget(self, action: #selector(resetCounter), for: .touchUpInside)
+    }
+    
+    func configureCounter() {
+        let stackView = UIStackView(arrangedSubviews: [counterTitle, counterResetBtn])
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 32),
+            stackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
+            
+            counterTitle.widthAnchor.constraint(lessThanOrEqualTo: stackView.widthAnchor, multiplier: 0.66)
+        ])
+    }
+    
+    func configureTitle() {
         titleLabel.text = L10n.MagicBall.title
         titleLabel.textAlignment = .center
+        
         subtitleLable.text = L10n.MagicBall.subtitle
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

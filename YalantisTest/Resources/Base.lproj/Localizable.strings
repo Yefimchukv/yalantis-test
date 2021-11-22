@@ -1,6 +1,11 @@
 "titles.magicBall" = "Magick Ball";
 "titles.settings" = "Settings";
 
+"counter.title" = "Total predictions: ";
+"counter.btn" = "Reset";
+
+"keychain.keys.predictionsCounter" = "counterKey";
+
 "magicBall.title" = "🔮";
 "magicBall.subtitle" = "Shake Your iPhone to ask the GURU";
 

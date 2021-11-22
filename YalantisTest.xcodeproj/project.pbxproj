@@ -26,6 +26,8 @@
 		85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474964271DD9A1003F170F /* NetworkStorageService.swift */; };
 		85474967271DDAA8003F170F /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474966271DDAA8003F170F /* Answer.swift */; };
 		85474969271DDB80003F170F /* YTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85474968271DDB80003F170F /* YTError.swift */; };
+		854AD27E274B0977006870F7 /* KeychainValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854AD27D274B0976006870F7 /* KeychainValue.swift */; };
+		855803A0274AB36E00E520B6 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558039F274AB36E00E520B6 /* SecureStorage.swift */; };
 		85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */; };
 		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
 		85CE0429273AA74800354E1B /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0427273AA74800354E1B /* strings.swift */; };
@@ -58,6 +60,8 @@
 		85474964271DD9A1003F170F /* NetworkStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStorageService.swift; sourceTree = "<group>"; };
 		85474966271DDAA8003F170F /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		85474968271DDB80003F170F /* YTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTError.swift; sourceTree = "<group>"; };
+		854AD27D274B0976006870F7 /* KeychainValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainValue.swift; sourceTree = "<group>"; };
+		8558039F274AB36E00E520B6 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		85767EE5273840AE007435A6 /* AnswerDependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDependencyManager.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		85CE0427273AA74800354E1B /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 			children = (
 				85354BB4271EFAB6003FCC9A /* Setting.swift */,
 				85474966271DDAA8003F170F /* Answer.swift */,
+				854AD27D274B0976006870F7 /* KeychainValue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				85474964271DD9A1003F170F /* NetworkStorageService.swift */,
 				85B859D9273580F9006EA996 /* StorageService.swift */,
 				85219CCD27443DD300633196 /* SettingsService.swift */,
+				8558039F274AB36E00E520B6 /* SecureStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -262,6 +268,7 @@
 				85474942271DA1FF003F170F /* Frameworks */,
 				85474943271DA1FF003F170F /* Resources */,
 				85CE0425273AA33300354E1B /* SwiftGen */,
+				2C0DD47164E8CF74DADC56E5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,6 +348,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2C0DD47164E8CF74DADC56E5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YalantisTest/Pods-YalantisTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		85CE0424273A975F00354E1B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -391,6 +415,8 @@
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
 				85219CCA27443DB400633196 /* SettingsViewModel.swift in Sources */,
 				85474949271DA1FF003F170F /* AppDelegate.swift in Sources */,
+				854AD27E274B0977006870F7 /* KeychainValue.swift in Sources */,
+				855803A0274AB36E00E520B6 /* SecureStorage.swift in Sources */,
 				85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */,
 				85CE0429273AA74800354E1B /* strings.swift in Sources */,
 				851737E1271F0D2200126356 /* SFSymbols.swift in Sources */,
