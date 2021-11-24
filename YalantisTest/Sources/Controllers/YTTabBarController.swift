@@ -18,7 +18,8 @@ class YTTabBarController: UITabBarController {
     
     private func createMagicBallNC() -> UINavigationController {
         let dependencyManager = AnswerDependencyManager()
-        let model = BallModel(answerDependencyManager: dependencyManager)
+        let secureStorage = SecureStorage()
+        let model = BallModel(answerDependencyManager: dependencyManager, secureStorage: secureStorage)
         let viewModel = BallViewModel(model: model)
         let magicBallVC = MagicBallVC(viewModel: viewModel)
         

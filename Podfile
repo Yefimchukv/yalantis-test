@@ -8,5 +8,6 @@ target 'YalantisTest' do
   # Pods for YalantisTest
   pod 'SwiftLint', '~> 0.45'
   pod 'SwiftGen', '~> 6.0'
+  pod 'KeychainSwift', '~> 19.0'
 
 end

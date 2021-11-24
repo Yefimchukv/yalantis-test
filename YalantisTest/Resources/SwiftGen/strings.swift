@@ -11,9 +11,11 @@ import Foundation
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
 
-  internal enum Cells {
-    /// settingsCell
-    internal static let settingsCell = L10n.tr("Localizable", "cells.settingsCell")
+  internal enum Counter {
+    /// Reset
+    internal static let btn = L10n.tr("Localizable", "counter.btn")
+    /// Total predictions: 
+    internal static let title = L10n.tr("Localizable", "counter.title")
   }
 
   internal enum Errors {
@@ -31,11 +33,6 @@ internal enum L10n {
     internal static let subtitle = L10n.tr("Localizable", "magicBall.subtitle")
     /// 🔮
     internal static let title = L10n.tr("Localizable", "magicBall.title")
-  }
-
-  internal enum SettingsKey {
-    /// straightPredictions
-    internal static let straightPredictions = L10n.tr("Localizable", "settingsKey.straightPredictions")
   }
 
   internal enum SettingsName {

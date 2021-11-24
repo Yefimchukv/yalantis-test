@@ -21,7 +21,7 @@ class SettingsService: SettingsServiceProtocol {
         // Gonna be some DB calls in further
         settingsArray = [
             ManagedSetting(name: L10n.SettingsName.straightPredictions,
-                    defaultsKey: L10n.SettingsKey.straightPredictions,
+                           defaultsKey: DefaultsKey.straightPredictions,
                     hasSwitch: true)
         ]
         
