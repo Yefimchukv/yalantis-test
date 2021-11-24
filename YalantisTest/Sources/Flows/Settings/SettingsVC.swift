@@ -31,6 +31,13 @@ class SettingsVC: UIViewController {
         
         viewModel.loadSettings()
     }
+    
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tableView.frame = view.bounds
+        tableView.layoutSubviews()
+    }
 }
 
 extension SettingsVC: UITableViewDataSource, UITableViewDelegate {

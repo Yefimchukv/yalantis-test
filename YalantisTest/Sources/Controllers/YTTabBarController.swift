@@ -13,13 +13,14 @@ class YTTabBarController: UITabBarController {
         super.viewDidLoad()
         
         UITabBar.appearance().tintColor = .systemRed
-        viewControllers = [createMagicBallNC(), createSettingsNC()]
+        viewControllers = [createMagicBallNC(), createHistoryNC(), createSettingsNC()]
     }
     
     private func createMagicBallNC() -> UINavigationController {
         let dependencyManager = AnswerDependencyManager()
         let secureStorage = SecureStorage()
-        let model = BallModel(answerDependencyManager: dependencyManager, secureStorage: secureStorage)
+        let dbService = CoreDataService()
+        let model = BallModel(answerDependencyManager: dependencyManager, secureStorage: secureStorage, dbSerive: dbService)
         let viewModel = BallViewModel(model: model)
         let magicBallVC = MagicBallVC(viewModel: viewModel)
         
@@ -28,6 +29,19 @@ class YTTabBarController: UITabBarController {
                                               tag: 0)
         
         return UINavigationController(rootViewController: magicBallVC)
+    }
+    
+    private func createHistoryNC() -> UINavigationController {
+        let dbService = CoreDataService()
+        let model = HistoryModel(dbService: dbService)
+        let viewModel = HistoryViewModel(model: model)
+        let historyVC = HistoryVC(viewModel: viewModel)
+        
+        historyVC.title = "Previous predictions"
+        
+        historyVC.tabBarItem = UITabBarItem(title: L10n.Titles.history, image: SFSymbols.bookClosed, tag: 1)
+        
+        return UINavigationController(rootViewController: historyVC)
     }
         
     private func createSettingsNC() -> UINavigationController {
@@ -38,7 +52,7 @@ class YTTabBarController: UITabBarController {
         settingsVC.title = L10n.Titles.settings
         settingsVC.tabBarItem = UITabBarItem(title: L10n.Titles.settings,
                                              image: SFSymbols.gearshape,
-                                             tag: 1)
+                                             tag: 2)
         
         return UINavigationController(rootViewController: settingsVC)
     }

@@ -80,12 +80,13 @@ class MagicBallVC: UIViewController {
         
         Task {
             do {
-                let answer = try await viewModel.fetchAnswer()
+                let presentableAnswer = try await viewModel.fetchAnswer()
                 let currentCount = viewModel.loadValue(with: KeychainsKey.predictionsCounter).value
-                viewModel.saveValue(of: currentCount, with: KeychainsKey.predictionsCounter)
+                viewModel.saveAnswerData(answer: presentableAnswer)
+                viewModel.saveCounterValue(of: currentCount, with: KeychainsKey.predictionsCounter)
                 updateCounter()
                 
-                presentAnswer(title: answer.answerTitle, message: answer.answerSubtitle)
+                presentAnswer(title: presentableAnswer.answerTitle, message: presentableAnswer.answerSubtitle)
                 
             } catch {
                 if let ytError = error as? YTError {

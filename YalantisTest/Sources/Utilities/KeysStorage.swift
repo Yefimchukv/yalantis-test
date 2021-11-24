@@ -23,4 +23,5 @@ enum KeychainsKey {
 
 enum CellsKey {
     static let settingsCell = "settingsCell"
+    static let historyCell = "historyCell"
 }

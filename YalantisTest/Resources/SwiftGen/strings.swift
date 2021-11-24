@@ -41,6 +41,8 @@ internal enum L10n {
   }
 
   internal enum Titles {
+    /// History
+    internal static let history = L10n.tr("Localizable", "titles.history")
     /// Magick Ball
     internal static let magicBall = L10n.tr("Localizable", "titles.magicBall")
     /// Settings

@@ -22,4 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = YTTabBarController()
         window?.makeKeyAndVisible()
     }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        CoreDataService().saveContext()
+    }
 }
