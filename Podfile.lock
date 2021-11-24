@@ -1,20 +1,24 @@
 PODS:
+  - KeychainSwift (19.0.0)
   - SwiftGen (6.5.1)
   - SwiftLint (0.45.0)
 
 DEPENDENCIES:
+  - KeychainSwift (~> 19.0)
   - SwiftGen (~> 6.0)
   - SwiftLint (~> 0.45)
 
 SPEC REPOS:
   trunk:
+    - KeychainSwift
     - SwiftGen
     - SwiftLint
 
 SPEC CHECKSUMS:
+  KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: 3be3f4eac1a6d5e872d2243ae8e44e80f30f73c8
+PODFILE CHECKSUM: 1bae582c48261407a2191d9c9c835321d115a178
 
 COCOAPODS: 1.10.1

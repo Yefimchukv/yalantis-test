@@ -40,7 +40,7 @@ extension SettingsVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: L10n.Cells.settingsCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellsKey.settingsCell, for: indexPath)
         
         let setting = viewModel.setting(at: indexPath.row)
     
@@ -83,6 +83,6 @@ private extension SettingsVC {
         tableView.dataSource = self
         view.addSubview(tableView)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: L10n.Cells.settingsCell)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellsKey.settingsCell)
     }
 }
