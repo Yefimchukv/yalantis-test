@@ -43,11 +43,6 @@ class AnswerVC: UIViewController {
         configureMessageLabel()   
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
     @objc private func dismissVC() {
         dismiss(animated: true, completion: nil)
     }
