@@ -30,7 +30,6 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureVC()
         configureCollectionView()
         configureDataSource()
     }
@@ -49,25 +48,20 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
         collectionView.frame = view.bounds
     }
     
-    func configureVC() {
-        view.backgroundColor = .systemBackground
-    }
-    
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnFlowLayout(in: view))
                 
-        view.addSubview(collectionView)
         collectionView.delegate = self
-        collectionView.backgroundColor = .systemBackground
-        
+        collectionView.backgroundColor = .systemGray5
         collectionView.register(HistoryItemCell.self, forCellWithReuseIdentifier: CellsKey.historyCell)
         
+        view.addSubview(collectionView)
     }
     
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, SavedAnswer>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsKey.historyCell, for: indexPath) as? HistoryItemCell
-            cell?.set(messageTitle: item.title!, message: item.message!, dateTitle: "test")
+            cell?.set(isLocal: item.isLocal, messageTitle: item.title!, message: item.message!, dateTitle: (item.date?.convertToTimeMonthYearFormat())!)
             print(item.date)
             return cell
         })

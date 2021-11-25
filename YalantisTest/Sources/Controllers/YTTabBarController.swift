@@ -37,7 +37,7 @@ class YTTabBarController: UITabBarController {
         let viewModel = HistoryViewModel(model: model)
         let historyVC = HistoryVC(viewModel: viewModel)
         
-        historyVC.title = "Previous predictions"
+        historyVC.title = L10n.Titles.history
         
         historyVC.tabBarItem = UITabBarItem(title: L10n.Titles.history, image: SFSymbols.bookClosed, tag: 1)
         

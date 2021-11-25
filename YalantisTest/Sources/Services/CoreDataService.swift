@@ -10,9 +10,7 @@ import CoreData
 
 protocol DBServiceProtocol {
     func saveData(answer: PresentableAnswer)
-    
-    func createData()
-    
+        
     func loadData() -> [SavedAnswer]
     
     func updateData()
@@ -21,6 +19,8 @@ protocol DBServiceProtocol {
 }
 
 class CoreDataService: DBServiceProtocol {
+    
+    let defaults = UserDefaults.standard
     
     var savedAnswerArray = [SavedAnswer]()
     
@@ -32,7 +32,7 @@ class CoreDataService: DBServiceProtocol {
         newAnswer.title = answer.answerTitle
         newAnswer.message = answer.answerSubtitle
         newAnswer.date = .now
-        newAnswer.isLocal = true
+        newAnswer.isLocal = defaults.bool(forKey: DefaultsKey.straightPredictions)
         
         savedAnswerArray.append(newAnswer)
         do {
@@ -40,10 +40,6 @@ class CoreDataService: DBServiceProtocol {
         } catch {
             print("error saving data: \(error)")
         }
-    }
-    
-    func createData() {
-        //
     }
     
     func loadData() -> [SavedAnswer] {
