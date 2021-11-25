@@ -22,7 +22,6 @@ class HistoryItemCell: UICollectionViewCell {
         configureTitle()
         configureDate()
         configureMessage()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +34,10 @@ class HistoryItemCell: UICollectionViewCell {
         self.messageLabel.text = message
         self.dateLabel.text = dateTitle
     }
+}
+
+// MARK: - Private configures and constraints
+private extension HistoryItemCell {
     
     func configure() {
         backgroundColor = .systemBackground

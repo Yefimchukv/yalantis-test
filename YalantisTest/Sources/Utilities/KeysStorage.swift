@@ -7,12 +7,6 @@
 
 import Foundation
 
-//"keychain.predictionsCounter" = "counterKey";
-//
-//"settingsKey.straightPredictions"  = "straightPredictions";
-//
-//"cells.settingsCell" = "settingsCell";
-
 enum DefaultsKey {
     static let straightPredictions = "straightPredictions"
 }

@@ -36,7 +36,8 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        items = viewModel.loadData().reversed()
+        
+        items = viewModel.loadData()
         updateData(on: items)
     }
     
@@ -47,7 +48,10 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
         collectionView.collectionViewLayout = UIHelper.createSingleColumnFlowLayout(in: view)
         collectionView.frame = view.bounds
     }
-    
+}
+
+// MARK: - CollectionView configures
+private extension HistoryVC {
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnFlowLayout(in: view))
                 
@@ -61,8 +65,7 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, SavedAnswer>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsKey.historyCell, for: indexPath) as? HistoryItemCell
-            cell?.set(isLocal: item.isLocal, messageTitle: item.title!, message: item.message!, dateTitle: (item.date?.convertToTimeMonthYearFormat())!)
-            print(item.date)
+            cell?.set(isLocal: item.isLocal, messageTitle: item.title!, message: item.message!, dateTitle: (item.date?.convertToTimeMonthYearFormat()) ?? "")
             return cell
         })
     }

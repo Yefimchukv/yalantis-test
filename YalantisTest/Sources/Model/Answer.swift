@@ -10,7 +10,6 @@ import Foundation
 // MARK: - ManagedAnswer
 struct ManagedAnswer: Codable {
     struct Magic: Codable {
-        let question: String
         let answer: String
         let type: String
     }
@@ -20,16 +19,13 @@ struct ManagedAnswer: Codable {
 
 extension ManagedAnswer {
     func toAnswer() -> Answer {
-        return Answer(magic: Answer.Magic(question: self.magic.question,
-                                          answer: self.magic.answer,
-                                          type: self.magic.type))
+        return Answer(magic: Answer.Magic(answer: self.magic.answer, type: self.magic.type))
     }
 }
 
 // MARK: - Answer
 struct Answer: Codable {
     struct Magic: Codable {
-        let question: String
         let answer: String
         let type: String
     }

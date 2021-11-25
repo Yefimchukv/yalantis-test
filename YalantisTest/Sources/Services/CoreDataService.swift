@@ -10,7 +10,7 @@ import CoreData
 
 protocol DBServiceProtocol {
     func saveData(answer: PresentableAnswer)
-        
+    
     func loadData() -> [SavedAnswer]
     
     func updateData()
@@ -44,8 +44,17 @@ class CoreDataService: DBServiceProtocol {
     
     func loadData() -> [SavedAnswer] {
         let request: NSFetchRequest<SavedAnswer> = SavedAnswer.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        
+        let fetchedResultsController = NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
         do {
-            self.savedAnswerArray = try context.fetch(request)
+            try fetchedResultsController.performFetch()
+            self.savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
             return savedAnswerArray
         } catch {
             print("Error fetching data: \(error)")
@@ -55,17 +64,17 @@ class CoreDataService: DBServiceProtocol {
     }
     
     func updateData() {
-        //
+        // TODO
     }
     
     func deleteData() {
-        //
+        // TODO
     }
     
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DBService")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }

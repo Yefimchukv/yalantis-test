@@ -15,24 +15,7 @@ final class HistoryModel {
         self.dbService = dbService
     }
     
-    func createData() {
-        //
-    }
-    
-    func saveData() {
-        //
-    }
-    
     func loadData() -> [SavedAnswer] {
         dbService.loadData()
     }
-    
-    func updateData() {
-        //
-    }
-    
-    func deleteData() {
-        //
-    }
-    
 }

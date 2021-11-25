@@ -15,23 +15,7 @@ final class HistoryViewModel {
         self.model = model
     }
     
-    func createData() {
-        //
-    }
-    
-    func saveData() {
-        //
-    }
-    
     func loadData() -> [SavedAnswer] {
         model.loadData()
-    }
-    
-    func updateData() {
-        //
-    }
-    
-    func deleteData() {
-        //
     }
 }
