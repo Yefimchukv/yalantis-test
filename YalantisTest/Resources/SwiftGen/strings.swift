@@ -28,6 +28,24 @@ internal enum L10n {
     }
   }
 
+  internal enum HardcodedAnswer {
+    /// HELL YEAH!
+    internal static let _1 = L10n.tr("Localizable", "hardcodedAnswer.1")
+    /// NO WAY
+    internal static let _2 = L10n.tr("Localizable", "hardcodedAnswer.2")
+    /// 50/50, it's up to you
+    internal static let _3 = L10n.tr("Localizable", "hardcodedAnswer.3")
+  }
+
+  internal enum HardcodedAnswerTitle {
+    /// Positive
+    internal static let _1 = L10n.tr("Localizable", "hardcodedAnswerTitle.1")
+    /// Negative
+    internal static let _2 = L10n.tr("Localizable", "hardcodedAnswerTitle.2")
+    /// Neutral
+    internal static let _3 = L10n.tr("Localizable", "hardcodedAnswerTitle.3")
+  }
+
   internal enum MagicBall {
     /// Shake Your iPhone to ask the GURU
     internal static let subtitle = L10n.tr("Localizable", "magicBall.subtitle")

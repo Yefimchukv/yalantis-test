@@ -14,10 +14,11 @@ class StorageService: AnswerProviderProtocol {
     func loadAnswer() async throws -> ManagedAnswer {
         
         // Gonna be some DB calls in further
+        // TODO
         hardcodedAnswers = [
-            ManagedAnswer(magic: ManagedAnswer.Magic(answer: "HELL YEAH!", type: "Positive")),
-            ManagedAnswer(magic: ManagedAnswer.Magic(answer: "NO WAY", type: "Negative")),
-            ManagedAnswer(magic: ManagedAnswer.Magic(answer: "50/50, it's up to you", type: "Neutral"))
+            ManagedAnswer(magic: ManagedAnswer.Magic(answer: L10n.HardcodedAnswer._1, type: L10n.HardcodedAnswerTitle._1)),
+            ManagedAnswer(magic: ManagedAnswer.Magic(answer: L10n.HardcodedAnswer._2, type: L10n.HardcodedAnswerTitle._2)),
+            ManagedAnswer(magic: ManagedAnswer.Magic(answer: L10n.HardcodedAnswer._3, type: L10n.HardcodedAnswerTitle._3))
         ]
         
         return hardcodedAnswers.randomElement()!

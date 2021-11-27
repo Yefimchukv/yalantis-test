@@ -5,7 +5,7 @@
 //  Created by Vitaliy Yefimchuk on 24.11.2021.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 protocol DBServiceProtocol {
@@ -68,18 +68,15 @@ class CoreDataService: DBServiceProtocol {
     }
     
     func updateData() {
-        // TODO
+        // TODO at hw8
     }
     
     func deleteData() {
         // TODO
     }
     
-
-    
     deinit {
         tokens.forEach {
-            print("deinit")
             NotificationCenter.default.removeObserver($0)
         }
     }
@@ -114,8 +111,7 @@ class CoreDataService: DBServiceProtocol {
 // MARK: - Notifications
 extension CoreDataService {
     func subscribeOnEventsForDB() {
-        tokens.append(NotificationCenter.default.addObserver(forName: UIEventsEnum.didEnterBackground, object: nil, queue: .main, using: { [weak self] _ in
-            print("Saved on persistance: \(self?.persistentContainer)")
+        tokens.append(NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main, using: { [weak self] _ in
             do {
                 try self?.context.save()
             } catch {

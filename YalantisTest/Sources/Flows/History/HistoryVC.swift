@@ -54,7 +54,7 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
 // MARK: - CollectionView configures
 private extension HistoryVC {
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnFlowLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnCompositionalLayout())
                 
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGray5

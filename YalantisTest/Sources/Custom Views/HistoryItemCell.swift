@@ -29,7 +29,7 @@ class HistoryItemCell: UICollectionViewCell {
     }
     
     func set(isLocal: Bool, messageTitle: String, message: String, dateTitle: String) {        
-        self.networkImage.image = isLocal ? UIImage(systemName: "wifi.slash") : UIImage(systemName: "wifi")
+        self.networkImage.image = isLocal ? SFSymbols.wifiSlash : SFSymbols.wifi
         self.titleLabel.text = messageTitle
         self.messageLabel.text = message
         self.dateLabel.text = dateTitle
@@ -42,6 +42,8 @@ private extension HistoryItemCell {
     func configure() {
         backgroundColor = .systemBackground
         layer.cornerRadius = 10
+        layer.shadowOpacity = 0.2
+        layer.shadowRadius = 4.0
         
         networkImage.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
