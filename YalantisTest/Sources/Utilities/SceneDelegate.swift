@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
     
     func scene(_ scene: UIScene,
@@ -16,14 +16,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
+    
+        let viewModel = YTTabBarControllerModel(answerDependencyManager: AnswerDependencyManager(),
+                                                    secureStorage: SecureStorage(),
+                                                    dbService: CoreDataService(),
+                                                    settingsService: SettingsService())
+        
+        let tabBar = YTTabBarController(viewModel: viewModel)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = YTTabBarController()
+        window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
-    }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        CoreDataService().saveContext()
     }
 }

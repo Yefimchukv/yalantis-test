@@ -16,9 +16,13 @@ protocol DBServiceProtocol {
     func updateData()
     
     func deleteData()
+    
+    func subscribeOnEventsForDB()
 }
 
 class CoreDataService: DBServiceProtocol {
+    
+    var tokens: [NSObjectProtocol] = []
     
     let defaults = UserDefaults.standard
     
@@ -71,18 +75,29 @@ class CoreDataService: DBServiceProtocol {
         // TODO
     }
     
-    // MARK: - Core Data stack
+
+    
+    deinit {
+        tokens.forEach {
+            print("deinit")
+            NotificationCenter.default.removeObserver($0)
+        }
+    }
+    
+    // Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
+        
         let container = NSPersistentContainer(name: "DBService")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        print(container)
         return container
     }()
     
-    // MARK: - Core Data Saving support
+    // Core Data Saving support
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -93,5 +108,19 @@ class CoreDataService: DBServiceProtocol {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+}
+
+// MARK: - Notifications
+extension CoreDataService {
+    func subscribeOnEventsForDB() {
+        tokens.append(NotificationCenter.default.addObserver(forName: UIEventsEnum.didEnterBackground, object: nil, queue: .main, using: { [weak self] _ in
+            print("Saved on persistance: \(self?.persistentContainer)")
+            do {
+                try self?.context.save()
+            } catch {
+                print(error)
+            }
+        }))
     }
 }

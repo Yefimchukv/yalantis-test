@@ -8,21 +8,26 @@
 import UIKit
 
 struct UIHelper {
-    static func createSingleColumnFlowLayout(in view: UIView) -> UICollectionViewLayout {
-        let width = view.bounds.width
+    static func createSingleColumnFlowLayout() -> UICollectionViewCompositionalLayout {
         
-        let padding: CGFloat = 16
-        let minimumItemSpacing: CGFloat = 14
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
         
-        let availableWidth = (width - (padding * 2)) / 1.2
-        let availableHeight: CGFloat = (296 - (padding * 2) - (minimumItemSpacing * 2))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: availableWidth, height: availableHeight)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 40, bottom: 8, trailing: 40)
         
-        flowLayout.collectionView?.center = view.center
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(296))
         
-        return flowLayout
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        
+        let section = NSCollectionLayoutSection(group: group)
+        
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
     }
 }

@@ -9,8 +9,6 @@ import Foundation
 
 extension Date {
     func convertToTimeMonthYearFormat() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm d.MM.yyyy"
-        return dateFormatter.string(from: self)
+        return Formatter.Date.timeMonthYearFormat.string(from: self)
     }
 }

@@ -18,4 +18,8 @@ final class HistoryViewModel {
     func loadData() -> [SavedAnswer] {
         model.loadData()
     }
+    
+    func subscribeOnEventsForDB() {
+        model.subscribeOnEventsForDB()
+    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistoryVC: UIViewController, UICollectionViewDelegate {
+final class HistoryVC: UIViewController, UICollectionViewDelegate {
     
     enum Section { case main }
     
@@ -32,6 +32,8 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
         
         configureCollectionView()
         configureDataSource()
+        
+        viewModel.subscribeOnEventsForDB()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,17 +45,16 @@ class HistoryVC: UIViewController, UICollectionViewDelegate {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        // update screens' orientation or rotates
-        collectionView.collectionViewLayout = UIHelper.createSingleColumnFlowLayout(in: view)
+
         collectionView.frame = view.bounds
     }
+        
 }
 
 // MARK: - CollectionView configures
 private extension HistoryVC {
     func configureCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnFlowLayout(in: view))
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnFlowLayout())
                 
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGray5

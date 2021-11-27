@@ -18,4 +18,8 @@ final class HistoryModel {
     func loadData() -> [SavedAnswer] {
         dbService.loadData()
     }
+    
+    func subscribeOnEventsForDB() {
+        dbService.subscribeOnEventsForDB()
+    }
 }

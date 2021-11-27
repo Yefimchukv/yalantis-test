@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsVC: UIViewController {
+final class SettingsVC: UIViewController {
     
     private var tableView = UITableView()
     
@@ -35,7 +35,8 @@ class SettingsVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         tableView.frame = view.bounds
-        tableView.layoutSubviews()
+//        tableView.setNeedsLayout()
+//        tableView.layoutIfNeeded()
     }
 }
 

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MagicBallVC: UIViewController {
+final class MagicBallVC: UIViewController {
     
     private let counterTitle = UILabel()
     private let counterResetBtn = UIButton()
