@@ -16,7 +16,7 @@ func bringCancellationOfWorkItem() {
     
     task?.notify(queue: .main) { print("completed") }
     
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
         task?.cancel()
     }
     
@@ -33,7 +33,7 @@ func bringDeadlock() {
     print("Line2")
 }
 
-//bringDeadlock()
+// bringDeadlock()
 
 func resolveDeadlock() {
     let queue = DispatchQueue(label: "com.GCD.yefimchukv.serial.1")
@@ -44,4 +44,4 @@ func resolveDeadlock() {
     print("Line2")
 }
 
-//resolveDeadlock()
+// resolveDeadlock()

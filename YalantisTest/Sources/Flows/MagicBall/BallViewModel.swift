@@ -24,9 +24,14 @@ final class BallViewModel {
         model.refreshAnswerProvider()
     }
     
+    // MARK: - Core Data
+    func saveAnswerData(answer: PresentableAnswer) {
+        model.saveAnswerData(answer: answer)
+    }
+    
     // MARK: - Keychain
-    func saveValue(of value: String, with key: String) {
-        model.saveValue(of: "\(Int(value)! + 1)", with: key)
+    func saveCounterValue(of value: String, with key: String) {
+        model.saveCounterValue(of: "\(Int(value)! + 1)", with: key)
     }
     
     func loadValue(with key: String) -> PresentableKeychainValue {
