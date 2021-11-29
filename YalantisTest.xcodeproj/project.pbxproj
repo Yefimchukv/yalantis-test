@@ -44,6 +44,8 @@
 		85CE0429273AA74800354E1B /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0427273AA74800354E1B /* strings.swift */; };
 		85CE042A273AA74800354E1B /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0428273AA74800354E1B /* assets.swift */; };
 		85CE0431273AACF700354E1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85CE042F273AACF700354E1B /* Localizable.strings */; };
+		85F7C33F27552A5400F7931B /* MappingModelV2toV3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 85F7C33E27552A5400F7931B /* MappingModelV2toV3.xcmappingmodel */; };
+		85F7C34227552B4000F7931B /* MappingModelV3toV4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 85F7C34127552B4000F7931B /* MappingModelV3toV4.xcmappingmodel */; };
 		BC13921A1C510EDF2A979CBD /* Pods_YalantisTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,9 @@
 		85CE0428273AA74800354E1B /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
 		85CE0430273AACF700354E1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		85F7C33D275522BE00F7931B /* DBService v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DBService v3.xcdatamodel"; sourceTree = "<group>"; };
+		85F7C33E27552A5400F7931B /* MappingModelV2toV3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModelV2toV3.xcmappingmodel; sourceTree = "<group>"; };
+		85F7C34027552B0800F7931B /* DBService v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DBService v4.xcdatamodel"; sourceTree = "<group>"; };
+		85F7C34127552B4000F7931B /* MappingModelV3toV4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappingModelV3toV4.xcmappingmodel; sourceTree = "<group>"; };
 		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -172,6 +177,8 @@
 				8558039F274AB36E00E520B6 /* SecureStorage.swift */,
 				85785C77274E62B000654CEE /* CoreDataService.swift */,
 				85785CA0274E8EEB00654CEE /* DBService.xcdatamodeld */,
+				85F7C33E27552A5400F7931B /* MappingModelV2toV3.xcmappingmodel */,
+				85F7C34127552B4000F7931B /* MappingModelV3toV4.xcmappingmodel */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -472,6 +479,7 @@
 				855803A0274AB36E00E520B6 /* SecureStorage.swift in Sources */,
 				85785C9D274E669B00654CEE /* UIHelper.swift in Sources */,
 				85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */,
+				85F7C33F27552A5400F7931B /* MappingModelV2toV3.xcmappingmodel in Sources */,
 				85CE0429273AA74800354E1B /* strings.swift in Sources */,
 				85785C74274E627C00654CEE /* HistoryViewModel.swift in Sources */,
 				851737E1271F0D2200126356 /* SFSymbols.swift in Sources */,
@@ -484,6 +492,7 @@
 				85002C172741831C007A12BA /* BallModel.swift in Sources */,
 				851737EA271F42B900126356 /* UIView+Ext.swift in Sources */,
 				8542B11727406526004CB3C1 /* BallViewModel.swift in Sources */,
+				85F7C34227552B4000F7931B /* MappingModelV3toV4.xcmappingmodel in Sources */,
 				85785C76274E628B00654CEE /* HistoryModel.swift in Sources */,
 				85785CA2274E8EEB00654CEE /* DBService.xcdatamodeld in Sources */,
 				85219CCC27443DBD00633196 /* SettingsModel.swift in Sources */,
@@ -717,11 +726,12 @@
 		85785CA0274E8EEB00654CEE /* DBService.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				85F7C34027552B0800F7931B /* DBService v4.xcdatamodel */,
 				85F7C33D275522BE00F7931B /* DBService v3.xcdatamodel */,
 				858B512627551D480013CBC8 /* DBService v2.xcdatamodel */,
 				85785CA1274E8EEB00654CEE /* DBService.xcdatamodel */,
 			);
-			currentVersion = 85F7C33D275522BE00F7931B /* DBService v3.xcdatamodel */;
+			currentVersion = 85F7C34027552B0800F7931B /* DBService v4.xcdatamodel */;
 			path = DBService.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -68,7 +68,7 @@ class CoreDataService: DBServiceProtocol {
     }
     
     func updateData() {
-        
+        //
     }
     
     func deleteData(for indexPath: Int) {
@@ -86,7 +86,6 @@ class CoreDataService: DBServiceProtocol {
     
     // Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
-//        print(persistentContainer.managedObjectModel.versionIdentifiers)
         let container = NSPersistentContainer(name: "DBService")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
