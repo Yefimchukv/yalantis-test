@@ -35,8 +35,6 @@ final class SettingsVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         tableView.frame = view.bounds
-//        tableView.setNeedsLayout()
-//        tableView.layoutIfNeeded()
     }
 }
 

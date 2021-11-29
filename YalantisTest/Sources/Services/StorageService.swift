@@ -14,7 +14,6 @@ class StorageService: AnswerProviderProtocol {
     func loadAnswer() async throws -> ManagedAnswer {
         
         // Gonna be some DB calls in further
-        // TODO
         hardcodedAnswers = [
             ManagedAnswer(magic: ManagedAnswer.Magic(answer: L10n.HardcodedAnswer._1, type: L10n.HardcodedAnswerTitle._1)),
             ManagedAnswer(magic: ManagedAnswer.Magic(answer: L10n.HardcodedAnswer._2, type: L10n.HardcodedAnswerTitle._2)),

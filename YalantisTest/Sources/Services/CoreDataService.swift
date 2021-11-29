@@ -72,7 +72,7 @@ class CoreDataService: DBServiceProtocol {
     }
     
     func deleteData() {
-        // TODO
+        // TODO at hw8
     }
     
     deinit {
@@ -96,8 +96,7 @@ class CoreDataService: DBServiceProtocol {
     
     // Core Data Saving support
     func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+        if self.context.hasChanges {
             do {
                 try context.save()
             } catch {
@@ -111,12 +110,21 @@ class CoreDataService: DBServiceProtocol {
 // MARK: - Notifications
 extension CoreDataService {
     func subscribeOnEventsForDB() {
-        tokens.append(NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main, using: { [weak self] _ in
-            do {
-                try self?.context.save()
-            } catch {
-                print(error)
-            }
-        }))
+        tokens.append(NotificationCenter.default.addObserver(
+            forName: UIApplication.didEnterBackgroundNotification,
+            object: nil,
+            queue: .main,
+            using: { [weak self] _ in
+                guard let self = self else { return }
+                
+                if self.context.hasChanges {
+                    do {
+                        try self.context.save()
+                    } catch {
+                        print(error)
+                    }
+                }
+            })
+        )
     }
 }
