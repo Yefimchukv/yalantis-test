@@ -9,9 +9,9 @@ import UIKit
 
 class YTTabBarController: UITabBarController {
     
-    var viewModel: YTTabBarControllerModel
+    var viewModel: YTTabBarControllerViewModel
     
-    init(viewModel: YTTabBarControllerModel) {
+    init(viewModel: YTTabBarControllerViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

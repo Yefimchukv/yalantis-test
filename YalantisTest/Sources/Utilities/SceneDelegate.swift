@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
     
-        let viewModel = YTTabBarControllerModel(answerDependencyManager: AnswerDependencyManager(),
+        let viewModel = YTTabBarControllerViewModel(answerDependencyManager: AnswerDependencyManager(),
                                                     secureStorage: SecureStorage(),
                                                     dbService: CoreDataService(),
                                                     settingsService: SettingsService())

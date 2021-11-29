@@ -39,7 +39,7 @@
 		85785CA2274E8EEB00654CEE /* DBService.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85785CA0274E8EEB00654CEE /* DBService.xcdatamodeld */; };
 		858B5124275264110013CBC8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858B5123275264110013CBC8 /* Date+Ext.swift */; };
 		85ADBA782751232C00383F6B /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ADBA772751232C00383F6B /* Formatter.swift */; };
-		85ADBA7A27513D7E00383F6B /* YTTabBarControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ADBA7927513D7E00383F6B /* YTTabBarControllerModel.swift */; };
+		85ADBA7A27513D7E00383F6B /* YTTabBarControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */; };
 		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
 		85CE0429273AA74800354E1B /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0427273AA74800354E1B /* strings.swift */; };
 		85CE042A273AA74800354E1B /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0428273AA74800354E1B /* assets.swift */; };
@@ -84,7 +84,7 @@
 		85785CA1274E8EEB00654CEE /* DBService.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBService.xcdatamodel; sourceTree = "<group>"; };
 		858B5123275264110013CBC8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		85ADBA772751232C00383F6B /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		85ADBA7927513D7E00383F6B /* YTTabBarControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarControllerModel.swift; sourceTree = "<group>"; };
+		85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarControllerViewModel.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		85CE0427273AA74800354E1B /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 		85CE0428273AA74800354E1B /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				851737E5271F3C1200126356 /* YTTabBarController.swift */,
-				85ADBA7927513D7E00383F6B /* YTTabBarControllerModel.swift */,
+				85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -473,7 +473,7 @@
 				85CE0429273AA74800354E1B /* strings.swift in Sources */,
 				85785C74274E627C00654CEE /* HistoryViewModel.swift in Sources */,
 				851737E1271F0D2200126356 /* SFSymbols.swift in Sources */,
-				85ADBA7A27513D7E00383F6B /* YTTabBarControllerModel.swift in Sources */,
+				85ADBA7A27513D7E00383F6B /* YTTabBarControllerViewModel.swift in Sources */,
 				85B859DA273580F9006EA996 /* StorageService.swift in Sources */,
 				85CE042A273AA74800354E1B /* assets.swift in Sources */,
 				858B5124275264110013CBC8 /* Date+Ext.swift in Sources */,

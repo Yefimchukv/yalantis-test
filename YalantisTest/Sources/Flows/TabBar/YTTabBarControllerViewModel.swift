@@ -1,5 +1,5 @@
 //
-//  YTTabBarControllerModel.swift
+//  YTTabBarControllerViewModel.swift
 //  YalantisTest
 //
 //  Created by Vitaliy Yefimchuk on 26.11.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class YTTabBarControllerModel {
+final class YTTabBarControllerViewModel {
     
     let answerDependencyManager: AnswerDependencyManager
     let secureStorage: SecureStorage
@@ -67,5 +67,4 @@ final class YTTabBarControllerModel {
         
         return UINavigationController(rootViewController: settingsVC)
     }
-
 }
