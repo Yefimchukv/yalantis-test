@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsVC: UIViewController {
+final class SettingsVC: UIViewController {
     
     private var tableView = UITableView()
     
@@ -30,6 +30,11 @@ class SettingsVC: UIViewController {
         configureTableView()
         
         viewModel.loadSettings()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        tableView.frame = view.bounds
     }
 }
 

@@ -16,11 +16,13 @@ final class BallModel {
     
     private let secureStorage: SecureStorageProtocol
     
-    init(answerDependencyManager: DependencyManagerProtocol, secureStorage: SecureStorageProtocol) {
+    private let dbService: DBServiceProtocol
+    
+    init(answerDependencyManager: DependencyManagerProtocol, secureStorage: SecureStorageProtocol, dbService: DBServiceProtocol) {
         self.answerDependencyManager = answerDependencyManager
         self.secureStorage = secureStorage
         self.answerProvider = self.answerDependencyManager.currentService
-        
+        self.dbService = dbService
     }
     
     // MARK: - Answer
@@ -33,8 +35,13 @@ final class BallModel {
         return answer.toAnswer()
     }
     
+    // MARK: - Core Data
+    func saveAnswerData(answer: PresentableAnswer) {
+        dbService.saveData(answer: answer)
+    }
+    
     // MARK: - Keychain
-    func saveValue(of value: String, with key: String) {
+    func saveCounterValue(of value: String, with key: String) {
         secureStorage.saveValue(of: value, with: key)
     }
     
