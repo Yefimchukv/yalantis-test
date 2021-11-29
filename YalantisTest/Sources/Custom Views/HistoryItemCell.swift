@@ -10,6 +10,7 @@ import UIKit
 class HistoryItemCell: UICollectionViewCell {
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
+    private let versionLabel = UILabel()
     private let dateLabel = UILabel()
     private let networkImage = UIImageView()
     
@@ -20,6 +21,7 @@ class HistoryItemCell: UICollectionViewCell {
         configure()
         configureImage()
         configureTitle()
+        configureVersion()
         configureDate()
         configureMessage()
     }
@@ -28,9 +30,10 @@ class HistoryItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(isLocal: Bool, messageTitle: String, message: String, dateTitle: String) {        
+    func set(isLocal: Bool, messageTitle: String, version: String, message: String, dateTitle: String) {
         self.networkImage.image = isLocal ? SFSymbols.wifiSlash : SFSymbols.wifi
         self.titleLabel.text = messageTitle
+        self.versionLabel.text = version
         self.messageLabel.text = message
         self.dateLabel.text = dateTitle
     }
@@ -47,10 +50,11 @@ private extension HistoryItemCell {
         
         networkImage.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        versionLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubviews(networkImage, titleLabel, messageLabel, dateLabel)
+        addSubviews(networkImage, titleLabel, versionLabel, messageLabel, dateLabel)
     }
     
     func configureImage() {
@@ -58,7 +62,15 @@ private extension HistoryItemCell {
         
         NSLayoutConstraint.activate([
             networkImage.topAnchor.constraint(equalTo: self.topAnchor, constant: padding * 2),
-            networkImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding * 2)
+            networkImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding * 2),
+            networkImage.widthAnchor.constraint(equalToConstant: 24)
+        ])
+    }
+    
+    func configureVersion() {
+        NSLayoutConstraint.activate([
+            versionLabel.topAnchor.constraint(equalTo: networkImage.topAnchor),
+            versionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2),
         ])
     }
     
@@ -71,11 +83,11 @@ private extension HistoryItemCell {
                 constant: padding * 2
             ),
             titleLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor,
+                equalTo: networkImage.trailingAnchor,
                 constant: padding * 2
             ),
             titleLabel.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor,
+                equalTo: versionLabel.leadingAnchor,
                 constant: -padding * 2
             ),
             titleLabel.heightAnchor.constraint(
@@ -83,7 +95,7 @@ private extension HistoryItemCell {
             )
         ])
     }
-
+    
     func configureDate() {
         dateLabel.textAlignment = .center
         NSLayoutConstraint.activate([

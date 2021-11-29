@@ -19,6 +19,10 @@ final class HistoryViewModel {
         model.loadData()
     }
     
+    func deleteData(for indexPath: Int) {
+        model.deleteData(for: indexPath)
+    }
+    
     func subscribeOnEventsForDB() {
         model.subscribeOnEventsForDB()
     }

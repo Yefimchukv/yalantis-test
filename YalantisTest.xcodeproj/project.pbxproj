@@ -83,12 +83,14 @@
 		85785C9E274E695D00654CEE /* HistoryItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItemCell.swift; sourceTree = "<group>"; };
 		85785CA1274E8EEB00654CEE /* DBService.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DBService.xcdatamodel; sourceTree = "<group>"; };
 		858B5123275264110013CBC8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		858B512627551D480013CBC8 /* DBService v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DBService v2.xcdatamodel"; sourceTree = "<group>"; };
 		85ADBA772751232C00383F6B /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarControllerViewModel.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		85CE0427273AA74800354E1B /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 		85CE0428273AA74800354E1B /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
 		85CE0430273AACF700354E1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		85F7C33D275522BE00F7931B /* DBService v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DBService v3.xcdatamodel"; sourceTree = "<group>"; };
 		972693FF801A04A7AA10FD8B /* Pods_YalantisTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YalantisTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -715,9 +717,11 @@
 		85785CA0274E8EEB00654CEE /* DBService.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				85F7C33D275522BE00F7931B /* DBService v3.xcdatamodel */,
+				858B512627551D480013CBC8 /* DBService v2.xcdatamodel */,
 				85785CA1274E8EEB00654CEE /* DBService.xcdatamodel */,
 			);
-			currentVersion = 85785CA1274E8EEB00654CEE /* DBService.xcdatamodel */;
+			currentVersion = 85F7C33D275522BE00F7931B /* DBService v3.xcdatamodel */;
 			path = DBService.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

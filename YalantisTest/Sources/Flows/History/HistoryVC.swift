@@ -45,17 +45,24 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-
+        
         collectionView.frame = view.bounds
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.deleteData(for: indexPath.item)
         
+        items.remove(at: indexPath.item)
+        
+        updateData(on: items)
+    }
 }
 
 // MARK: - CollectionView configures
 private extension HistoryVC {
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createSingleColumnCompositionalLayout())
-                
+        
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGray5
         collectionView.register(HistoryItemCell.self, forCellWithReuseIdentifier: CellsKey.historyCell)
@@ -66,7 +73,7 @@ private extension HistoryVC {
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, SavedAnswer>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsKey.historyCell, for: indexPath) as? HistoryItemCell
-            cell?.set(isLocal: item.isLocal, messageTitle: item.title!, message: item.message!, dateTitle: (item.date?.convertToTimeMonthYearFormat()) ?? "")
+            cell?.set(isLocal: item.isLocal, messageTitle: item.title!, version: item.version!, message: item.message!, dateTitle: (item.date?.convertToTimeMonthYearFormat()) ?? "")
             return cell
         })
     }

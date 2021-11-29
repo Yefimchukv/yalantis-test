@@ -15,7 +15,7 @@ protocol DBServiceProtocol {
     
     func updateData()
     
-    func deleteData()
+    func deleteData(for indexPath: Int)
     
     func subscribeOnEventsForDB()
 }
@@ -28,11 +28,11 @@ class CoreDataService: DBServiceProtocol {
     
     var savedAnswerArray = [SavedAnswer]()
     
-    lazy var context = persistentContainer.viewContext
+    lazy var backgroundContext = persistentContainer.newBackgroundContext()
     
     func saveData(answer: PresentableAnswer) {
         
-        let newAnswer = SavedAnswer(context: context)
+        let newAnswer = SavedAnswer(context: backgroundContext)
         newAnswer.title = answer.answerTitle
         newAnswer.message = answer.answerSubtitle
         newAnswer.date = .now
@@ -40,7 +40,7 @@ class CoreDataService: DBServiceProtocol {
         
         savedAnswerArray.append(newAnswer)
         do {
-            try context.save()
+            try backgroundContext.save()
         } catch {
             print("error saving data: \(error)")
         }
@@ -52,7 +52,7 @@ class CoreDataService: DBServiceProtocol {
         
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: request,
-            managedObjectContext: context,
+            managedObjectContext: backgroundContext,
             sectionNameKeyPath: nil,
             cacheName: nil
         )
@@ -68,11 +68,14 @@ class CoreDataService: DBServiceProtocol {
     }
     
     func updateData() {
-        // TODO at hw8
+        
     }
     
-    func deleteData() {
-        // TODO at hw8
+    func deleteData(for indexPath: Int) {
+        let items = loadData()
+        backgroundContext.delete(items[indexPath])
+        
+        saveContext()
     }
     
     deinit {
@@ -83,22 +86,22 @@ class CoreDataService: DBServiceProtocol {
     
     // Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
-        
+//        print(persistentContainer.managedObjectModel.versionIdentifiers)
         let container = NSPersistentContainer(name: "DBService")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        print(container)
+        
         return container
     }()
     
     // Core Data Saving support
     func saveContext () {
-        if self.context.hasChanges {
+        if self.backgroundContext.hasChanges {
             do {
-                try context.save()
+                try backgroundContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -117,9 +120,9 @@ extension CoreDataService {
             using: { [weak self] _ in
                 guard let self = self else { return }
                 
-                if self.context.hasChanges {
+                if self.backgroundContext.hasChanges {
                     do {
-                        try self.context.save()
+                        try self.backgroundContext.save()
                     } catch {
                         print(error)
                     }
