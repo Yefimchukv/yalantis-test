@@ -22,13 +22,11 @@ protocol DBServiceProtocol {
 
 class CoreDataService: DBServiceProtocol {
     
-    var tokens: [NSObjectProtocol] = []
+    private var tokens: [NSObjectProtocol] = []
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     
-    var savedAnswerArray = [SavedAnswer]()
-    
-    lazy var backgroundContext = persistentContainer.newBackgroundContext()
+    lazy private var backgroundContext = persistentContainer.newBackgroundContext()
     
     func saveData(answer: PresentableAnswer) {
         
@@ -38,7 +36,9 @@ class CoreDataService: DBServiceProtocol {
         newAnswer.date = .now
         newAnswer.isLocal = defaults.bool(forKey: DefaultsKey.straightPredictions)
         
-        savedAnswerArray.append(newAnswer)
+        var savedAnswers = loadData()
+        savedAnswers.append(newAnswer)
+        
         do {
             try backgroundContext.save()
         } catch {
@@ -58,7 +58,7 @@ class CoreDataService: DBServiceProtocol {
         )
         do {
             try fetchedResultsController.performFetch()
-            self.savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
+            let savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
             return savedAnswerArray
         } catch {
             print("Error fetching data: \(error)")
@@ -85,7 +85,7 @@ class CoreDataService: DBServiceProtocol {
     }
     
     // Core Data stack
-    lazy var persistentContainer: NSPersistentContainer = {
+    lazy private var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DBService")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {

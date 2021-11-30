@@ -70,7 +70,7 @@ private extension HistoryItemCell {
     func configureVersion() {
         NSLayoutConstraint.activate([
             versionLabel.topAnchor.constraint(equalTo: networkImage.topAnchor),
-            versionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2),
+            versionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding * 2)
         ])
     }
     
