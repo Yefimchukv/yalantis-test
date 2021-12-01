@@ -9,14 +9,16 @@ import Foundation
 
 final class HistoryViewModel {
     
+    var items: [SavedAnswer] = []
+    
     private let model: HistoryModel
     
     init(model: HistoryModel) {
         self.model = model
     }
     
-    func loadData() -> [SavedAnswer] {
-        model.loadData()
+    func loadData() {
+        items = model.loadData()
     }
     
     func deleteData(for indexPath: Int) {

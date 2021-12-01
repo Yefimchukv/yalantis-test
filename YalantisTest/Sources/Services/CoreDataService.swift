@@ -13,8 +13,6 @@ protocol DBServiceProtocol {
     
     func loadData() -> [SavedAnswer]
     
-    func updateData()
-    
     func deleteData(for indexPath: Int)
     
     func subscribeOnEventsForDB()
@@ -28,54 +26,54 @@ class CoreDataService: DBServiceProtocol {
     
     lazy private var backgroundContext = persistentContainer.newBackgroundContext()
     
+    // MARK: - Save
     func saveData(answer: PresentableAnswer) {
-        
-        let newAnswer = SavedAnswer(context: backgroundContext)
-        newAnswer.title = answer.answerTitle
-        newAnswer.message = answer.answerSubtitle
-        newAnswer.date = .now
-        newAnswer.isLocal = defaults.bool(forKey: DefaultsKey.straightPredictions)
-        
-        var savedAnswers = loadData()
-        savedAnswers.append(newAnswer)
-        
-        do {
-            try backgroundContext.save()
-        } catch {
-            print("error saving data: \(error)")
+        backgroundContext.performAndWait {
+            
+            let newAnswer = SavedAnswer(context: backgroundContext)
+            newAnswer.title = answer.answerTitle
+            newAnswer.message = answer.answerSubtitle
+            newAnswer.date = .now
+            newAnswer.isLocal = defaults.bool(forKey: DefaultsKey.straightPredictions)
+            
+            var savedAnswers = loadData()
+            savedAnswers.append(newAnswer)
+            
+            saveContext()
         }
     }
-    
+        
+    // MARK: - Load
     func loadData() -> [SavedAnswer] {
-        let request: NSFetchRequest<SavedAnswer> = SavedAnswer.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: backgroundContext,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-        do {
-            try fetchedResultsController.performFetch()
-            let savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
-            return savedAnswerArray
-        } catch {
-            print("Error fetching data: \(error)")
-            return []
+        backgroundContext.performAndWait {
+            let request: NSFetchRequest<SavedAnswer> = SavedAnswer.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+            
+            let fetchedResultsController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: backgroundContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            do {
+                try fetchedResultsController.performFetch()
+                let savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
+                return savedAnswerArray
+            } catch {
+                print("Error fetching data: \(error)")
+                return []
+            }
         }
-        
     }
     
-    func updateData() {
-        //
-    }
-    
+    // MARK: - Delete
     func deleteData(for indexPath: Int) {
-        let items = loadData()
-        backgroundContext.delete(items[indexPath])
-        
-        saveContext()
+        backgroundContext.performAndWait {
+            let items = loadData()
+            backgroundContext.delete(items[indexPath])
+            
+            saveContext()
+        }
     }
     
     deinit {
@@ -92,7 +90,6 @@ class CoreDataService: DBServiceProtocol {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        
         return container
     }()
     
@@ -119,12 +116,8 @@ extension CoreDataService {
             using: { [weak self] _ in
                 guard let self = self else { return }
                 
-                if self.backgroundContext.hasChanges {
-                    do {
-                        try self.backgroundContext.save()
-                    } catch {
-                        print(error)
-                    }
+                self.backgroundContext.perform {
+                    self.saveContext()
                 }
             })
         )

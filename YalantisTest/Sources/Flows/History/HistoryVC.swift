@@ -14,8 +14,6 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, SavedAnswer>!
     
-    var items: [SavedAnswer] = []
-    
     var viewModel: HistoryViewModel!
     
     init(viewModel: HistoryViewModel) {
@@ -39,8 +37,8 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        items = viewModel.loadData()
-        updateData(on: items)
+        viewModel.loadData()
+        updateData(on: viewModel.items)
     }
     
     override func viewWillLayoutSubviews() {
@@ -51,10 +49,9 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         viewModel.deleteData(for: indexPath.item)
+        viewModel.items.remove(at: indexPath.item)
         
-        items.remove(at: indexPath.item)
-        
-        updateData(on: items)
+        updateData(on: viewModel.items)
     }
 }
 
@@ -73,7 +70,7 @@ private extension HistoryVC {
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, SavedAnswer>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellsKey.historyCell, for: indexPath) as? HistoryItemCell
-            cell?.set(isLocal: item.isLocal, messageTitle: item.title!, version: item.version!, message: item.message!, dateTitle: (item.date?.convertToTimeMonthYearFormat()) ?? "")
+            cell?.set(isLocal: item.isLocal, messageTitle: item.title, version: item.version, message: item.message, dateTitle: item.date?.convertToTimeMonthYearFormat())
             return cell
         })
     }

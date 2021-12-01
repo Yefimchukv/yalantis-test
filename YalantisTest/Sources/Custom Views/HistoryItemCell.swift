@@ -30,7 +30,7 @@ class HistoryItemCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(isLocal: Bool, messageTitle: String, version: String, message: String, dateTitle: String) {
+    func set(isLocal: Bool, messageTitle: String?, version: String?, message: String?, dateTitle: String?) {
         self.networkImage.image = isLocal ? SFSymbols.wifiSlash : SFSymbols.wifi
         self.titleLabel.text = messageTitle
         self.versionLabel.text = version
