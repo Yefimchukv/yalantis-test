@@ -13,66 +13,67 @@ protocol DBServiceProtocol {
     
     func loadData() -> [SavedAnswer]
     
-    func updateData()
-    
-    func deleteData()
+    func deleteData(for indexPath: Int)
     
     func subscribeOnEventsForDB()
 }
 
 class CoreDataService: DBServiceProtocol {
     
-    var tokens: [NSObjectProtocol] = []
+    private var tokens: [NSObjectProtocol] = []
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     
-    var savedAnswerArray = [SavedAnswer]()
+    lazy private var backgroundContext = persistentContainer.newBackgroundContext()
     
-    lazy var context = persistentContainer.viewContext
-    
+    // MARK: - Save
     func saveData(answer: PresentableAnswer) {
-        
-        let newAnswer = SavedAnswer(context: context)
-        newAnswer.title = answer.answerTitle
-        newAnswer.message = answer.answerSubtitle
-        newAnswer.date = .now
-        newAnswer.isLocal = defaults.bool(forKey: DefaultsKey.straightPredictions)
-        
-        savedAnswerArray.append(newAnswer)
-        do {
-            try context.save()
-        } catch {
-            print("error saving data: \(error)")
+        backgroundContext.performAndWait {
+            
+            let newAnswer = SavedAnswer(context: backgroundContext)
+            newAnswer.title = answer.answerTitle
+            newAnswer.message = answer.answerSubtitle
+            newAnswer.date = .now
+            newAnswer.isLocal = defaults.bool(forKey: DefaultsKey.straightPredictions)
+            
+            var savedAnswers = loadData()
+            savedAnswers.append(newAnswer)
+            
+            saveContext()
         }
     }
-    
+        
+    // MARK: - Load
     func loadData() -> [SavedAnswer] {
-        let request: NSFetchRequest<SavedAnswer> = SavedAnswer.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: request,
-            managedObjectContext: context,
-            sectionNameKeyPath: nil,
-            cacheName: nil
-        )
-        do {
-            try fetchedResultsController.performFetch()
-            self.savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
-            return savedAnswerArray
-        } catch {
-            print("Error fetching data: \(error)")
-            return []
+        backgroundContext.performAndWait {
+            let request: NSFetchRequest<SavedAnswer> = SavedAnswer.fetchRequest()
+            request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+            
+            let fetchedResultsController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: backgroundContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
+            do {
+                try fetchedResultsController.performFetch()
+                let savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
+                return savedAnswerArray
+            } catch {
+                print("Error fetching data: \(error)")
+                return []
+            }
         }
-        
     }
     
-    func updateData() {
-        // TODO at hw8
-    }
-    
-    func deleteData() {
-        // TODO at hw8
+    // MARK: - Delete
+    func deleteData(for indexPath: Int) {
+        backgroundContext.performAndWait {
+            let items = loadData()
+            backgroundContext.delete(items[indexPath])
+            
+            saveContext()
+        }
     }
     
     deinit {
@@ -82,23 +83,21 @@ class CoreDataService: DBServiceProtocol {
     }
     
     // Core Data stack
-    lazy var persistentContainer: NSPersistentContainer = {
-        
+    lazy private var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DBService")
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        print(container)
         return container
     }()
     
     // Core Data Saving support
     func saveContext () {
-        if self.context.hasChanges {
+        if self.backgroundContext.hasChanges {
             do {
-                try context.save()
+                try backgroundContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -117,12 +116,8 @@ extension CoreDataService {
             using: { [weak self] _ in
                 guard let self = self else { return }
                 
-                if self.context.hasChanges {
-                    do {
-                        try self.context.save()
-                    } catch {
-                        print(error)
-                    }
+                self.backgroundContext.perform {
+                    self.saveContext()
                 }
             })
         )

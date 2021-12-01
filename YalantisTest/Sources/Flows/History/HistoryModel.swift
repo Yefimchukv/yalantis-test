@@ -19,6 +19,10 @@ final class HistoryModel {
         dbService.loadData()
     }
     
+    func deleteData(for indexPath: Int) {
+        dbService.deleteData(for: indexPath)
+    }
+    
     func subscribeOnEventsForDB() {
         dbService.subscribeOnEventsForDB()
     }

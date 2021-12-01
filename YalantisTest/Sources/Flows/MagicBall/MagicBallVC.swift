@@ -82,6 +82,7 @@ final class MagicBallVC: UIViewController {
             do {
                 let presentableAnswer = try await viewModel.fetchAnswer()
                 let currentCount = viewModel.loadValue(with: KeychainsKey.predictionsCounter).value
+                
                 viewModel.saveAnswerData(answer: presentableAnswer)
                 viewModel.saveCounterValue(of: currentCount, with: KeychainsKey.predictionsCounter)
                 updateCounter()
