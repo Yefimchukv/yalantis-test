@@ -14,6 +14,7 @@ final class MagicBallVC: UIViewController {
     
     private let counterTitle = UILabel()
     private let counterResetBtn = UIButton()
+    private var counterStackView = UIStackView()
     
     private let titleStandImage = UIImageView()
     private let titleBallImage = UIImageView()
@@ -27,9 +28,6 @@ final class MagicBallVC: UIViewController {
     private var viewModel: BallViewModel!
     
     private var motionManager = CMMotionManager()
-    private var animator = UIViewPropertyAnimator(duration: 3.0, curve: .linear)
-    
-    var stackView = UIStackView()
     
     init(viewModel: BallViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -63,13 +61,19 @@ final class MagicBallVC: UIViewController {
             self.isShaking = true
             
             motionManager.startGyroUpdates(to: .main) { data, _ in
-                UIView.animate(withDuration: 0.1) {
-                    self.titleView.layer.position.x -= data!.rotationRate.z / 2
-                    self.titleView.layer.position.y -= data!.rotationRate.x / 2
+                guard let data = data else { return }
+                
+                UIView.animate(withDuration: 0.1) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.titleView.layer.position.x -= data.rotationRate.z / 2
+                    self.titleView.layer.position.y -= data.rotationRate.x / 2
                 } completion: { _ in
-                    UIView.animate(withDuration: 0.1) {
-                        self.titleView.layer.position.x += data!.rotationRate.z / 2
-                        self.titleView.layer.position.y += data!.rotationRate.x / 2
+                    UIView.animate(withDuration: 0.1) { [weak self] in
+                        guard let self = self else { return }
+                        
+                        self.titleView.layer.position.x += data.rotationRate.z / 2
+                        self.titleView.layer.position.y += data.rotationRate.x / 2
                     }
                 }
             }
@@ -89,24 +93,20 @@ final class MagicBallVC: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            
-            //            self.view.layer.removeAllAnimations()
             self.handleMotion()
-            
         }
     }
     
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            
             self.handleMotion()
-            
         }
     }
     
     private func handleMotion() {
         self.isShaking = false
         self.isAnswerLoaded = false
+        self.currentAnswer = nil
         self.motionManager.stopGyroUpdates()
         
         self.performRequest()
@@ -115,18 +115,26 @@ final class MagicBallVC: UIViewController {
     }
     
     private func loadWithAnimationsIfNeeded() {
-        UIView.animate(withDuration: 1, delay: 0, options: []) {
+        UIView.animate(withDuration: 1, delay: 0, options: []) { [weak self] in
+            guard let self = self else { return }
+            
             self.titleBallImage.layer.position.y -= 32
         } completion: { _ in
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 1) { [weak self] in
+                guard let self = self else { return }
+                
                 self.titleBallImage.transform = CGAffineTransform(rotationAngle: .pi)
                 self.titleBallImage.transform = CGAffineTransform(rotationAngle: .pi * 2)
-            } completion: { _ in
-                UIView.animate(withDuration: 1, delay: 0, options: []) {
+            } completion: {  _ in
+                UIView.animate(withDuration: 1, delay: 0, options: []) { [weak self] in
+                    guard let self = self else { return }
+                    
                     self.titleBallImage.layer.position.y += 32
-                } completion: { _ in
+                } completion: { [weak self] _ in
+                    guard let self = self else { return }
+                    
                     if self.isAnswerLoaded {
-                        self.presentAnswer(title: self.currentAnswer!.answerTitle, message: self.currentAnswer!.answerSubtitle)
+                        self.presentAnswer(title: self.currentAnswer?.answerTitle, message: self.currentAnswer?.answerSubtitle)
                     } else {
                         self.loadWithAnimationsIfNeeded()
                     }
@@ -151,19 +159,14 @@ final class MagicBallVC: UIViewController {
                 updateCounter()
                 
                 self.currentAnswer = presentableAnswer
-//                presentAnswer(title: presentableAnswer.answerTitle, message: presentableAnswer.answerSubtitle)
                 
             } catch {
                 if let ytError = error as? YTError {
                     self.isAnswerLoaded = true
                     self.currentAnswer = Answer(magic: Answer.Magic(answer: ytError.rawValue, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
-//                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
-//                                  message: ytError.rawValue)
                 } else {
                     self.isAnswerLoaded = true
                     self.currentAnswer = Answer(magic: Answer.Magic(answer: L10n.Errors.UltimateUnknownError.message, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
-//                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
-//                                  message: L10n.Errors.UltimateUnknownError.message)
                 }
             }
         }
@@ -218,19 +221,19 @@ private extension MagicBallVC {
     }
     
     func configureCounter() {
-        stackView = UIStackView(arrangedSubviews: [counterTitle, counterResetBtn])
-        stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        counterStackView = UIStackView(arrangedSubviews: [counterTitle, counterResetBtn])
+        counterStackView.spacing = 16
+        counterStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stackView)
+        view.addSubview(counterStackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 32),
-            stackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
+            counterStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            counterStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            counterStackView.heightAnchor.constraint(lessThanOrEqualToConstant: 32),
+            counterStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
             
-            counterTitle.widthAnchor.constraint(lessThanOrEqualTo: stackView.widthAnchor, multiplier: 0.66)
+            counterTitle.widthAnchor.constraint(lessThanOrEqualTo: counterStackView.widthAnchor, multiplier: 0.66)
         ])
     }
     
@@ -240,22 +243,21 @@ private extension MagicBallVC {
         titleView.layer.shadowOpacity = 0.3
         titleView.layer.shadowRadius = 2.0
         
-        // MARK: - testLabel
+        view.addSubview(titleView)
+        
+        titleStandImage.image = Asset.ballStand.image
+        
         titleBallImage.image = Asset.ballCircle.image
         titleBallImage.layer.cornerRadius = 20
         titleBallImage.alpha = 0.9
-        
-        view.addSubview(titleView)
-        
-        titleView.addSubviews(titleStandImage, titleBallImage, titleLabel)
-        
-        titleStandImage.image = Asset.ballStand.image
         
         titleLabel.text = L10n.MagicBall.subtitle
         titleLabel.textColor = .systemRed
         titleLabel.textAlignment = .center
         titleLabel.font = .boldSystemFont(ofSize: 16)
         titleLabel.adjustsFontSizeToFitWidth = true
+        
+        titleView.addSubviews(titleStandImage, titleBallImage, titleLabel)
         
         titleView.translatesAutoresizingMaskIntoConstraints = false
         titleStandImage.translatesAutoresizingMaskIntoConstraints = false
@@ -266,7 +268,7 @@ private extension MagicBallVC {
             
             titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            titleView.topAnchor.constraint(greaterThanOrEqualTo: stackView.bottomAnchor, constant: 8),
+            titleView.topAnchor.constraint(greaterThanOrEqualTo: counterStackView.bottomAnchor, constant: 8),
             titleView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 1),
             titleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4),
             titleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/6),
@@ -283,10 +285,10 @@ private extension MagicBallVC {
             titleBallImage.widthAnchor.constraint(equalTo: titleStandImage.widthAnchor),
             titleBallImage.heightAnchor.constraint(equalTo: titleBallImage.widthAnchor),
             
-            titleLabel.topAnchor.constraint(lessThanOrEqualTo: titleStandImage.bottomAnchor, constant: 32),
-            titleLabel.bottomAnchor.constraint(lessThanOrEqualTo: titleView.bottomAnchor, constant: -8),
+            titleLabel.topAnchor.constraint(equalTo: titleStandImage.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 8),
-            titleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -8)
+            titleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -8),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 }

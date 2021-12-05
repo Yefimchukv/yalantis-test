@@ -2,12 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:CA364946-D42D-4499-885C-137CEFF24633_1_201_a.jpeg">
-   </FileRef>
-   <FileRef
       location = "group:YalantisTest.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:App.mp4">
    </FileRef>
 </Workspace>

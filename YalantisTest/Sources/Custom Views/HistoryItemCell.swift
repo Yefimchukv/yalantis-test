@@ -45,6 +45,7 @@ private extension HistoryItemCell {
     func configure() {
         backgroundColor = .systemBackground
         layer.cornerRadius = 10
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shadowOpacity = 0.2
         layer.shadowRadius = 4.0
         
