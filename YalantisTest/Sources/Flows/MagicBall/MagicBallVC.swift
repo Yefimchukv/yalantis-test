@@ -25,13 +25,13 @@ final class MagicBallVC: UIViewController {
     
     private var currentAnswer: PresentableAnswer?
     
-    private var viewModel: BallViewModel!
+    private let viewModel: BallViewModel
     
     private var motionManager = CMMotionManager()
     
     init(viewModel: BallViewModel) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -58,7 +58,7 @@ final class MagicBallVC: UIViewController {
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            self.isShaking = true
+            isShaking = true
             
             motionManager.startGyroUpdates(to: .main) { data, _ in
                 guard let data = data else { return }
@@ -93,25 +93,25 @@ final class MagicBallVC: UIViewController {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            self.handleMotion()
+            handleMotion()
         }
     }
     
     override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            self.handleMotion()
+            handleMotion()
         }
     }
     
     private func handleMotion() {
-        self.isShaking = false
-        self.isAnswerLoaded = false
-        self.currentAnswer = nil
-        self.motionManager.stopGyroUpdates()
+        isShaking = false
+        isAnswerLoaded = false
+        currentAnswer = nil
+        motionManager.stopGyroUpdates()
         
-        self.performRequest()
+        performRequest()
         
-        self.loadWithAnimationsIfNeeded()
+        loadWithAnimationsIfNeeded()
     }
     
     private func loadWithAnimationsIfNeeded() {
@@ -273,13 +273,11 @@ private extension MagicBallVC {
             titleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4),
             titleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/6),
             
-            // 372x170
             titleStandImage.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
             titleStandImage.centerYAnchor.constraint(equalTo: titleView.centerYAnchor, constant: 32),
             titleStandImage.widthAnchor.constraint(equalTo: titleView.heightAnchor, multiplier: 0.33),
             titleStandImage.heightAnchor.constraint(equalTo: titleStandImage.widthAnchor, multiplier: 0.5),
             
-            // 400x400
             titleBallImage.bottomAnchor.constraint(equalTo: titleStandImage.centerYAnchor),
             titleBallImage.centerXAnchor.constraint(equalTo: titleStandImage.centerXAnchor),
             titleBallImage.widthAnchor.constraint(equalTo: titleStandImage.widthAnchor),
