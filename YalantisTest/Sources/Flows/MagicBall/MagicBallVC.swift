@@ -63,14 +63,12 @@ final class MagicBallVC: UIViewController {
             motionManager.startGyroUpdates(to: .main) { data, _ in
                 guard let data = data else { return }
                 
-                UIView.animate(withDuration: 0.1) { [weak self] in
-                    guard let self = self else { return }
+                UIView.animate(withDuration: 0.1) {
                     
                     self.titleView.layer.position.x -= data.rotationRate.z / 2
                     self.titleView.layer.position.y -= data.rotationRate.x / 2
                 } completion: { _ in
-                    UIView.animate(withDuration: 0.1) { [weak self] in
-                        guard let self = self else { return }
+                    UIView.animate(withDuration: 0.1) {
                         
                         self.titleView.layer.position.x += data.rotationRate.z / 2
                         self.titleView.layer.position.y += data.rotationRate.x / 2
@@ -78,8 +76,7 @@ final class MagicBallVC: UIViewController {
                 }
             }
             
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
-                guard let self = self else { return }
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 
                 if self.isShaking {
                     let generator = UIImpactFeedbackGenerator(style: .light)
@@ -115,23 +112,17 @@ final class MagicBallVC: UIViewController {
     }
     
     private func loadWithAnimationsIfNeeded() {
-        UIView.animate(withDuration: 1, delay: 0, options: []) { [weak self] in
-            guard let self = self else { return }
-            
+        UIView.animate(withDuration: 1, delay: 0, options: []) {
             self.titleBallImage.layer.position.y -= 32
         } completion: { _ in
-            UIView.animate(withDuration: 1) { [weak self] in
-                guard let self = self else { return }
-                
+            UIView.animate(withDuration: 1) {
                 self.titleBallImage.transform = CGAffineTransform(rotationAngle: .pi)
                 self.titleBallImage.transform = CGAffineTransform(rotationAngle: .pi * 2)
             } completion: {  _ in
-                UIView.animate(withDuration: 1, delay: 0, options: []) { [weak self] in
-                    guard let self = self else { return }
+                UIView.animate(withDuration: 1, delay: 0, options: []) {
                     
                     self.titleBallImage.layer.position.y += 32
-                } completion: { [weak self] _ in
-                    guard let self = self else { return }
+                } completion: { _ in
                     
                     if self.isAnswerLoaded {
                         self.presentAnswer(title: self.currentAnswer?.answerTitle, message: self.currentAnswer?.answerSubtitle)
