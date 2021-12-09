@@ -6,22 +6,32 @@
 //
 
 import UIKit
+import CoreMotion
 
 final class MagicBallVC: UIViewController {
     
+    private let titleView = UIView()
+    
     private let counterTitle = UILabel()
     private let counterResetBtn = UIButton()
+    private var counterStackView = UIStackView()
     
+    private let titleStandImage = UIImageView()
+    private let titleBallImage = UIImageView()
     private let titleLabel = UILabel()
-    private let subtitleLable = UILabel()
     
     private var isShaking = false
+    private var isAnswerLoaded = false
     
-    private var viewModel: BallViewModel!
+    private var currentAnswer: PresentableAnswer?
+    
+    private let viewModel: BallViewModel
+    
+    private var motionManager = CMMotionManager()
     
     init(viewModel: BallViewModel) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -31,9 +41,9 @@ final class MagicBallVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
-        configureTitle()
         setCounter()
         configureCounter()
+        configureTitle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,13 +58,28 @@ final class MagicBallVC: UIViewController {
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            self.isShaking = true
+            isShaking = true
             
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] timer in
-                guard let self = self else { return }
+            motionManager.startGyroUpdates(to: .main) { data, _ in
+                guard let data = data else { return }
+                
+                UIView.animate(withDuration: 0.1) {
+                    
+                    self.titleView.layer.position.x -= data.rotationRate.z / 2
+                    self.titleView.layer.position.y -= data.rotationRate.x / 2
+                } completion: { _ in
+                    UIView.animate(withDuration: 0.1) {
+                        
+                        self.titleView.layer.position.x += data.rotationRate.z / 2
+                        self.titleView.layer.position.y += data.rotationRate.x / 2
+                    }
+                }
+            }
+            
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
                 
                 if self.isShaking {
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
                 } else {
                     timer.invalidate()
@@ -76,26 +101,63 @@ final class MagicBallVC: UIViewController {
     }
     
     private func handleMotion() {
-        self.isShaking = false
+        isShaking = false
+        isAnswerLoaded = false
+        currentAnswer = nil
+        motionManager.stopGyroUpdates()
         
+        performRequest()
+        
+        loadWithAnimationsIfNeeded()
+    }
+    
+    private func loadWithAnimationsIfNeeded() {
+        UIView.animate(withDuration: 1, delay: 0, options: []) {
+            self.titleBallImage.layer.position.y -= 32
+        } completion: { _ in
+            UIView.animate(withDuration: 1) {
+                self.titleBallImage.transform = CGAffineTransform(rotationAngle: .pi)
+                self.titleBallImage.transform = CGAffineTransform(rotationAngle: .pi * 2)
+            } completion: {  _ in
+                UIView.animate(withDuration: 1, delay: 0, options: []) {
+                    
+                    self.titleBallImage.layer.position.y += 32
+                } completion: { _ in
+                    
+                    if self.isAnswerLoaded {
+                        self.presentAnswer(title: self.currentAnswer?.answerTitle, message: self.currentAnswer?.answerSubtitle)
+                    } else {
+                        self.loadWithAnimationsIfNeeded()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func performRequest() {
         Task {
             do {
                 let presentableAnswer = try await viewModel.fetchAnswer()
+                
                 let currentCount = viewModel.loadValue(with: KeychainsKey.predictionsCounter).value
                 
                 viewModel.saveAnswerData(answer: presentableAnswer)
+                
                 viewModel.saveCounterValue(of: currentCount, with: KeychainsKey.predictionsCounter)
+                
+                self.isAnswerLoaded = true
+                
                 updateCounter()
                 
-                presentAnswer(title: presentableAnswer.answerTitle, message: presentableAnswer.answerSubtitle)
+                self.currentAnswer = presentableAnswer
                 
             } catch {
                 if let ytError = error as? YTError {
-                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
-                                  message: ytError.rawValue)
+                    self.isAnswerLoaded = true
+                    self.currentAnswer = Answer(magic: Answer.Magic(answer: ytError.rawValue, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
                 } else {
-                    presentAnswer(title: L10n.Errors.UltimateUnknownError.title,
-                                  message: L10n.Errors.UltimateUnknownError.message)
+                    self.isAnswerLoaded = true
+                    self.currentAnswer = Answer(magic: Answer.Magic(answer: L10n.Errors.UltimateUnknownError.message, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
                 }
             }
         }
@@ -150,39 +212,72 @@ private extension MagicBallVC {
     }
     
     func configureCounter() {
-        let stackView = UIStackView(arrangedSubviews: [counterTitle, counterResetBtn])
-        stackView.spacing = 16
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        counterStackView = UIStackView(arrangedSubviews: [counterTitle, counterResetBtn])
+        counterStackView.spacing = 16
+        counterStackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stackView)
+        view.addSubview(counterStackView)
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 32),
-            stackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
+            counterStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            counterStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            counterStackView.heightAnchor.constraint(lessThanOrEqualToConstant: 32),
+            counterStackView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor),
             
-            counterTitle.widthAnchor.constraint(lessThanOrEqualTo: stackView.widthAnchor, multiplier: 0.66)
+            counterTitle.widthAnchor.constraint(lessThanOrEqualTo: counterStackView.widthAnchor, multiplier: 0.66)
         ])
     }
     
     func configureTitle() {
-        titleLabel.text = L10n.MagicBall.title
+        titleView.backgroundColor = .systemGray6
+        titleView.layer.cornerRadius = 12
+        titleView.layer.shadowOpacity = 0.3
+        titleView.layer.shadowRadius = 2.0
+        
+        view.addSubview(titleView)
+        
+        titleStandImage.image = Asset.ballStand.image
+        
+        titleBallImage.image = Asset.ballCircle.image
+        titleBallImage.layer.cornerRadius = 20
+        titleBallImage.alpha = 0.9
+        
+        titleLabel.text = L10n.MagicBall.subtitle
+        titleLabel.textColor = .systemRed
         titleLabel.textAlignment = .center
+        titleLabel.font = .boldSystemFont(ofSize: 16)
+        titleLabel.adjustsFontSizeToFitWidth = true
         
-        subtitleLable.text = L10n.MagicBall.subtitle
+        titleView.addSubviews(titleStandImage, titleBallImage, titleLabel)
         
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        titleStandImage.translatesAutoresizingMaskIntoConstraints = false
+        titleBallImage.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLable.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubviews(titleLabel, subtitleLable)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            subtitleLable.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            subtitleLable.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 8)
+            titleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            titleView.topAnchor.constraint(greaterThanOrEqualTo: counterStackView.bottomAnchor, constant: 8),
+            titleView.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 1),
+            titleView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/4),
+            titleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 4/6),
+            
+            titleStandImage.centerXAnchor.constraint(equalTo: titleView.centerXAnchor),
+            titleStandImage.centerYAnchor.constraint(equalTo: titleView.centerYAnchor, constant: 32),
+            titleStandImage.widthAnchor.constraint(equalTo: titleView.heightAnchor, multiplier: 0.33),
+            titleStandImage.heightAnchor.constraint(equalTo: titleStandImage.widthAnchor, multiplier: 0.5),
+            
+            titleBallImage.bottomAnchor.constraint(equalTo: titleStandImage.centerYAnchor),
+            titleBallImage.centerXAnchor.constraint(equalTo: titleStandImage.centerXAnchor),
+            titleBallImage.widthAnchor.constraint(equalTo: titleStandImage.widthAnchor),
+            titleBallImage.heightAnchor.constraint(equalTo: titleBallImage.widthAnchor),
+            
+            titleLabel.topAnchor.constraint(equalTo: titleStandImage.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: -8),
+            titleLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
 }

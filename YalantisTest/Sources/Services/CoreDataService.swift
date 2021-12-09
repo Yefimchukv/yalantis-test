@@ -60,7 +60,6 @@ class CoreDataService: DBServiceProtocol {
                 let savedAnswerArray = fetchedResultsController.fetchedObjects ?? []
                 return savedAnswerArray
             } catch {
-                print("Error fetching data: \(error)")
                 return []
             }
         }
