@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol AnswerProviderProtocol {
-    func loadAnswer() async throws -> ManagedAnswer
+    func loadAnswer() -> Observable<ManagedAnswer>
 }
 
 protocol DependencyManagerProtocol {

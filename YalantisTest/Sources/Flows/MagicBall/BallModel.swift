@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 final class BallModel {
 
@@ -30,9 +31,9 @@ final class BallModel {
         self.answerProvider = answerDependencyManager.currentService
     }
     
-    func fetchAnswer() async throws -> Answer {
-        let answer = try await answerProvider.loadAnswer()
-        return answer.toAnswer()
+    func fetchAnswer() -> Observable<Answer> {
+        answerProvider.loadAnswer().map { $0.toAnswer() }
+        
     }
     
     // MARK: - Core Data
@@ -45,8 +46,10 @@ final class BallModel {
         secureStorage.saveValue(of: value, with: key)
     }
     
-    func loadValue(with key: String) -> KeychainValue {
-        return secureStorage.loadValue(with: key).toKeychainValue()
+    func loadValue(with key: String) -> Observable<KeychainValue> {
+        secureStorage.loadValue(with: key)
+        return secureStorage.observable.map { $0.toKeychainValue() }
+        
     }
     
     func resetValue(with key: String) {
