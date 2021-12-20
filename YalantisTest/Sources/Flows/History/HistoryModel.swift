@@ -8,12 +8,13 @@
 import UIKit
 import RxSwift
 
-final class HistoryModel {
+class HistoryModel: NavigationNode {
     
     private let dbService: DBServiceProtocol
     
-    init(dbService: DBServiceProtocol) {
+    init(parent: NavigationNode, dbService: DBServiceProtocol) {
         self.dbService = dbService
+        super.init(parent: parent)
     }
     
     func loadData() -> [SavedAnswer] {

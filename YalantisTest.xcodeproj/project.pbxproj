@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		85002C172741831C007A12BA /* BallModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85002C162741831C007A12BA /* BallModel.swift */; };
 		851737E1271F0D2200126356 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E0271F0D2200126356 /* SFSymbols.swift */; };
-		851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E5271F3C1200126356 /* YTTabBarController.swift */; };
 		851737EA271F42B900126356 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851737E9271F42B900126356 /* UIView+Ext.swift */; };
 		85219CCA27443DB400633196 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85219CC927443DB400633196 /* SettingsViewModel.swift */; };
 		85219CCC27443DBD00633196 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85219CCB27443DBD00633196 /* SettingsModel.swift */; };
@@ -39,8 +38,13 @@
 		85785CA2274E8EEB00654CEE /* DBService.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 85785CA0274E8EEB00654CEE /* DBService.xcdatamodeld */; };
 		858B5124275264110013CBC8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858B5123275264110013CBC8 /* Date+Ext.swift */; };
 		85ADBA782751232C00383F6B /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ADBA772751232C00383F6B /* Formatter.swift */; };
-		85ADBA7A27513D7E00383F6B /* YTTabBarControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */; };
 		85B859DA273580F9006EA996 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B859D9273580F9006EA996 /* StorageService.swift */; };
+		85C423842770D37100EBC6A1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C423832770D37100EBC6A1 /* Coordinator.swift */; };
+		85C423862770D54300EBC6A1 /* HistoryFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C423852770D54300EBC6A1 /* HistoryFlowCoordinator.swift */; };
+		85C4238A2770D6D700EBC6A1 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C423892770D6D700EBC6A1 /* AppFlowCoordinator.swift */; };
+		85C4238C2770D6E700EBC6A1 /* NavigationNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C4238B2770D6E700EBC6A1 /* NavigationNode.swift */; };
+		85C4238E277114E500EBC6A1 /* MagicBallCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C4238D277114E500EBC6A1 /* MagicBallCoordinator.swift */; };
+		85C42390277114F300EBC6A1 /* SettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C4238F277114F300EBC6A1 /* SettingsCoordinator.swift */; };
 		85CE0429273AA74800354E1B /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0427273AA74800354E1B /* strings.swift */; };
 		85CE042A273AA74800354E1B /* assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CE0428273AA74800354E1B /* assets.swift */; };
 		85CE0431273AACF700354E1B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85CE042F273AACF700354E1B /* Localizable.strings */; };
@@ -54,7 +58,6 @@
 		63F6BA16EA48BEE8F9EC97B5 /* Pods-YalantisTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YalantisTest.release.xcconfig"; path = "Target Support Files/Pods-YalantisTest/Pods-YalantisTest.release.xcconfig"; sourceTree = "<group>"; };
 		85002C162741831C007A12BA /* BallModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BallModel.swift; sourceTree = "<group>"; };
 		851737E0271F0D2200126356 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
-		851737E5271F3C1200126356 /* YTTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarController.swift; sourceTree = "<group>"; };
 		851737E9271F42B900126356 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		85219CC927443DB400633196 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		85219CCB27443DBD00633196 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -87,8 +90,13 @@
 		858B5123275264110013CBC8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		858B512627551D480013CBC8 /* DBService v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DBService v2.xcdatamodel"; sourceTree = "<group>"; };
 		85ADBA772751232C00383F6B /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTTabBarControllerViewModel.swift; sourceTree = "<group>"; };
 		85B859D9273580F9006EA996 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		85C423832770D37100EBC6A1 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		85C423852770D54300EBC6A1 /* HistoryFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryFlowCoordinator.swift; sourceTree = "<group>"; };
+		85C423892770D6D700EBC6A1 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		85C4238B2770D6E700EBC6A1 /* NavigationNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationNode.swift; sourceTree = "<group>"; };
+		85C4238D277114E500EBC6A1 /* MagicBallCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagicBallCoordinator.swift; sourceTree = "<group>"; };
+		85C4238F277114F300EBC6A1 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		85CE0427273AA74800354E1B /* strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
 		85CE0428273AA74800354E1B /* assets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assets.swift; sourceTree = "<group>"; };
 		85CE0430273AACF700354E1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -125,6 +133,7 @@
 				8547494C271DA1FF003F170F /* MagicBallVC.swift */,
 				8542B11627406526004CB3C1 /* BallViewModel.swift */,
 				85002C162741831C007A12BA /* BallModel.swift */,
+				85C4238D277114E500EBC6A1 /* MagicBallCoordinator.swift */,
 			);
 			path = MagicBall;
 			sourceTree = "<group>";
@@ -135,6 +144,7 @@
 				8547495C271DB16E003F170F /* SettingsVC.swift */,
 				85219CC927443DB400633196 /* SettingsViewModel.swift */,
 				85219CCB27443DBD00633196 /* SettingsModel.swift */,
+				85C4238F277114F300EBC6A1 /* SettingsCoordinator.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -160,10 +170,10 @@
 		851737DC271F0C3700126356 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				851737DE271F0C7400126356 /* TabBar */,
 				85785C70274E620900654CEE /* History */,
 				85002C15274182FB007A12BA /* Settings */,
 				85002C14274182CD007A12BA /* MagicBall */,
+				85C423872770D6B600EBC6A1 /* FlowCoordinator */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -181,15 +191,6 @@
 				85F7C34127552B4000F7931B /* MappingModelV3toV4.xcmappingmodel */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		851737DE271F0C7400126356 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				851737E5271F3C1200126356 /* YTTabBarController.swift */,
-				85ADBA7927513D7E00383F6B /* YTTabBarControllerViewModel.swift */,
-			);
-			path = TabBar;
 			sourceTree = "<group>";
 		};
 		851737DF271F0C8A00126356 /* Utilities */ = {
@@ -280,6 +281,7 @@
 				85785C71274E626B00654CEE /* HistoryVC.swift */,
 				85785C73274E627C00654CEE /* HistoryViewModel.swift */,
 				85785C75274E628B00654CEE /* HistoryModel.swift */,
+				85C423852770D54300EBC6A1 /* HistoryFlowCoordinator.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -293,6 +295,16 @@
 				85474968271DDB80003F170F /* YTError.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		85C423872770D6B600EBC6A1 /* FlowCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				85C423832770D37100EBC6A1 /* Coordinator.swift */,
+				85C423892770D6D700EBC6A1 /* AppFlowCoordinator.swift */,
+				85C4238B2770D6E700EBC6A1 /* NavigationNode.swift */,
+			);
+			path = FlowCoordinator;
 			sourceTree = "<group>";
 		};
 		85CE0426273AA61000354E1B /* SwiftGen */ = {
@@ -467,10 +479,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				85ADBA782751232C00383F6B /* Formatter.swift in Sources */,
+				85C4238A2770D6D700EBC6A1 /* AppFlowCoordinator.swift in Sources */,
 				85785C78274E62B000654CEE /* CoreDataService.swift in Sources */,
 				8547494D271DA1FF003F170F /* MagicBallVC.swift in Sources */,
 				85474967271DDAA8003F170F /* Answer.swift in Sources */,
-				851737E6271F3C1200126356 /* YTTabBarController.swift in Sources */,
 				85474963271DC45C003F170F /* AnswerVC.swift in Sources */,
 				8547495D271DB16E003F170F /* SettingsVC.swift in Sources */,
 				85219CCA27443DB400633196 /* SettingsViewModel.swift in Sources */,
@@ -481,15 +493,17 @@
 				85767EE6273840AE007435A6 /* AnswerDependencyManager.swift in Sources */,
 				85F7C33F27552A5400F7931B /* MappingModelV2toV3.xcmappingmodel in Sources */,
 				85CE0429273AA74800354E1B /* strings.swift in Sources */,
+				85C423842770D37100EBC6A1 /* Coordinator.swift in Sources */,
 				85785C74274E627C00654CEE /* HistoryViewModel.swift in Sources */,
 				851737E1271F0D2200126356 /* SFSymbols.swift in Sources */,
-				85ADBA7A27513D7E00383F6B /* YTTabBarControllerViewModel.swift in Sources */,
 				85B859DA273580F9006EA996 /* StorageService.swift in Sources */,
+				85C4238C2770D6E700EBC6A1 /* NavigationNode.swift in Sources */,
 				85CE042A273AA74800354E1B /* assets.swift in Sources */,
 				858B5124275264110013CBC8 /* Date+Ext.swift in Sources */,
 				85219CCE27443DD300633196 /* SettingsService.swift in Sources */,
 				85474965271DD9A1003F170F /* NetworkStorageService.swift in Sources */,
 				85002C172741831C007A12BA /* BallModel.swift in Sources */,
+				85C42390277114F300EBC6A1 /* SettingsCoordinator.swift in Sources */,
 				851737EA271F42B900126356 /* UIView+Ext.swift in Sources */,
 				8542B11727406526004CB3C1 /* BallViewModel.swift in Sources */,
 				85F7C34227552B4000F7931B /* MappingModelV3toV4.xcmappingmodel in Sources */,
@@ -500,7 +514,9 @@
 				85785C72274E626B00654CEE /* HistoryVC.swift in Sources */,
 				85785C6F274E578100654CEE /* KeysStorage.swift in Sources */,
 				85785C9F274E695D00654CEE /* HistoryItemCell.swift in Sources */,
+				85C423862770D54300EBC6A1 /* HistoryFlowCoordinator.swift in Sources */,
 				85474969271DDB80003F170F /* YTError.swift in Sources */,
+				85C4238E277114E500EBC6A1 /* MagicBallCoordinator.swift in Sources */,
 				85354BB5271EFAB6003FCC9A /* Setting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

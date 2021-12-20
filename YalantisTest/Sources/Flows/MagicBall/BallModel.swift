@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-final class BallModel {
+final class BallModel: NavigationNode {
 
     /// Manages network/local services
     private let answerDependencyManager: DependencyManagerProtocol
@@ -19,11 +19,13 @@ final class BallModel {
     
     private let dbService: DBServiceProtocol
     
-    init(answerDependencyManager: DependencyManagerProtocol, secureStorage: SecureStorageProtocol, dbService: DBServiceProtocol) {
+    init(parent: NavigationNode, answerDependencyManager: DependencyManagerProtocol, secureStorage: SecureStorageProtocol, dbService: DBServiceProtocol) {
         self.answerDependencyManager = answerDependencyManager
         self.secureStorage = secureStorage
         self.answerProvider = self.answerDependencyManager.currentService
         self.dbService = dbService
+        
+        super.init(parent: parent)
     }
     
     // MARK: - Answer

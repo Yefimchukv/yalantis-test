@@ -135,7 +135,9 @@ final class MagicBallVC: UIViewController {
                 
                 return Observable.just(erroredAnswer)
                 
-            }).subscribe(onNext: { answer in
+            }).subscribe(onNext: { [weak self] answer in
+                guard let self = self else { return }
+                
                 self.isAnswerLoaded = true
                 self.viewModel.saveAnswerData(answer: answer)
                 self.viewModel.saveCounterValue(of: (self.counterTitle.text?.last?.description)!,
