@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreMotion
+import RxSwift
+import RxCocoa
 
 final class MagicBallVC: UIViewController {
     
@@ -29,6 +31,8 @@ final class MagicBallVC: UIViewController {
     
     private var motionManager = CMMotionManager()
     
+    private let disposeBag = DisposeBag()
+    
     init(viewModel: BallViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -44,12 +48,15 @@ final class MagicBallVC: UIViewController {
         setCounter()
         configureCounter()
         configureTitle()
+        
+        configureBindings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         viewModel.refreshAnswerProvider()
+        
     }
     
     override func becomeFirstResponder() -> Bool {
@@ -100,15 +107,43 @@ final class MagicBallVC: UIViewController {
         }
     }
     
+    private func configureBindings() {
+        // Counter
+        viewModel.loadValue(with: KeychainsKey.predictionsCounter)
+            .map { "\(L10n.Counter.title)\($0.value)" }
+            .bind(to: self.counterTitle.rx.text)
+            .disposed(by: disposeBag)
+        
+        // Reset tapped
+        counterResetBtn.rx.tap.subscribe { [weak self] _ in
+            self?.viewModel.resetValue(with: KeychainsKey.predictionsCounter)
+        }.disposed(by: disposeBag)
+    }
+    
     private func handleMotion() {
         isShaking = false
         isAnswerLoaded = false
         currentAnswer = nil
         motionManager.stopGyroUpdates()
         
-        performRequest()
-        
-        loadWithAnimationsIfNeeded()
+        viewModel.fetchAnswer()
+            .observe(on: MainScheduler.instance)
+            .catch({ error in
+                guard let ytError = error as? YTError else { fatalError() }
+                
+                let erroredAnswer = Answer(magic: Answer.Magic(answer: ytError.rawValue, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
+                
+                return Observable.just(erroredAnswer)
+                
+            }).subscribe(onNext: { answer in
+                self.isAnswerLoaded = true
+                self.viewModel.saveAnswerData(answer: answer)
+                self.viewModel.saveCounterValue(of: (self.counterTitle.text?.last?.description)!,
+                                                with: KeychainsKey.predictionsCounter)
+                self.currentAnswer = answer
+            }).disposed(by: disposeBag)
+                    
+                    loadWithAnimationsIfNeeded()
     }
     
     private func loadWithAnimationsIfNeeded() {
@@ -134,50 +169,6 @@ final class MagicBallVC: UIViewController {
         }
     }
     
-    private func performRequest() {
-        Task {
-            do {
-                let presentableAnswer = try await viewModel.fetchAnswer()
-                
-                let currentCount = viewModel.loadValue(with: KeychainsKey.predictionsCounter).value
-                
-                viewModel.saveAnswerData(answer: presentableAnswer)
-                
-                viewModel.saveCounterValue(of: currentCount, with: KeychainsKey.predictionsCounter)
-                
-                self.isAnswerLoaded = true
-                
-                updateCounter()
-                
-                self.currentAnswer = presentableAnswer
-                
-            } catch {
-                if let ytError = error as? YTError {
-                    self.isAnswerLoaded = true
-                    self.currentAnswer = Answer(magic: Answer.Magic(answer: ytError.rawValue, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
-                } else {
-                    self.isAnswerLoaded = true
-                    self.currentAnswer = Answer(magic: Answer.Magic(answer: L10n.Errors.UltimateUnknownError.message, type: L10n.Errors.UltimateUnknownError.title)).toPresentableAnswer()
-                }
-            }
-        }
-    }
-    
-    @objc private func resetCounter() {
-        viewModel.resetValue(with: KeychainsKey.predictionsCounter)
-        updateCounter()
-    }
-    
-    private func updateCounter() {
-        let currentPredictionsNumber = viewModel.loadValue(with: KeychainsKey.predictionsCounter).value
-        
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            self.counterTitle.text = L10n.Counter.title + "\(currentPredictionsNumber)"
-        }
-    }
-    
     private func presentAnswer(title: String?, message: String?) {
         guard let title = title, let message = message else { return }
         
@@ -196,7 +187,6 @@ private extension MagicBallVC {
     }
     
     func setCounter() {
-        counterTitle.text = L10n.Counter.title + "\(viewModel.loadValue(with: KeychainsKey.predictionsCounter).value)"
         counterTitle.adjustsFontSizeToFitWidth = true
         counterTitle.translatesAutoresizingMaskIntoConstraints = false
         
@@ -207,8 +197,6 @@ private extension MagicBallVC {
         counterResetBtn.configuration?.baseBackgroundColor = .systemMint
         counterResetBtn.configuration?.title = L10n.Counter.btn
         counterResetBtn.translatesAutoresizingMaskIntoConstraints = false
-        
-        counterResetBtn.addTarget(self, action: #selector(resetCounter), for: .touchUpInside)
     }
     
     func configureCounter() {

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class HistoryVC: UIViewController, UICollectionViewDelegate {
     
@@ -15,6 +17,8 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
     var dataSource: UICollectionViewDiffableDataSource<Section, SavedAnswer>!
     
     var viewModel: HistoryViewModel!
+    
+    private let disposeBag = DisposeBag()
     
     init(viewModel: HistoryViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -31,6 +35,7 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
         configureCollectionView()
         configureDataSource()
         
+        configureBindings()
         viewModel.subscribeOnEventsForDB()
     }
     
@@ -47,11 +52,15 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
         collectionView.frame = view.bounds
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.deleteData(for: indexPath.item)
-        viewModel.items.remove(at: indexPath.item)
-        
-        updateData(on: viewModel.items)
+    private func configureBindings() {
+        collectionView.rx.itemSelected.subscribe(onNext: { [weak self] index in
+            guard let self = self else { return }
+            
+            self.viewModel.deleteData(for: index.item).subscribe(onNext: {
+                self.viewModel.items.remove(at: index.item)
+                self.updateData(on: self.viewModel.items)
+            }).disposed(by: self.disposeBag)
+        }).disposed(by: disposeBag)
     }
 }
 

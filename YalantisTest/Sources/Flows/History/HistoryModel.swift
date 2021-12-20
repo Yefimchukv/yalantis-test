@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 final class HistoryModel {
     
@@ -19,7 +20,7 @@ final class HistoryModel {
         dbService.loadData()
     }
     
-    func deleteData(for indexPath: Int) {
+    func deleteData(for indexPath: Int) -> Observable<Void> {
         dbService.deleteData(for: indexPath)
     }
     
