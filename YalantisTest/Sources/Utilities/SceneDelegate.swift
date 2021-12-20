@@ -16,17 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-    
-        let viewModel = YTTabBarControllerViewModel(answerDependencyManager: AnswerDependencyManager(),
-                                                    secureStorage: SecureStorage(),
-                                                    dbService: CoreDataService(),
-                                                    settingsService: SettingsService())
         
-        let tabBar = YTTabBarController(viewModel: viewModel)
+        let appCoordinator = AppFlowCoordinator(parent: nil, answerDependencyManager: AnswerDependencyManager(),
+                                                secureStorage: SecureStorage(),
+                                                dbService: CoreDataService(),
+                                                settingsService: SettingsService())
+        
+        let controller = appCoordinator.createFlow()
+        appCoordinator.containerViewController = controller
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = tabBar
+        window?.rootViewController = controller
         window?.makeKeyAndVisible()
     }
 }

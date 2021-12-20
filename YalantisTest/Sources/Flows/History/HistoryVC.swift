@@ -56,10 +56,12 @@ final class HistoryVC: UIViewController, UICollectionViewDelegate {
         collectionView.rx.itemSelected.subscribe(onNext: { [weak self] index in
             guard let self = self else { return }
             
-            self.viewModel.deleteData(for: index.item).subscribe(onNext: {
+            self.viewModel.deleteData(for: index.item).flatMap { () -> Observable<Void> in
                 self.viewModel.items.remove(at: index.item)
                 self.updateData(on: self.viewModel.items)
-            }).disposed(by: self.disposeBag)
+                return .just(())
+            }.subscribe().disposed(by: self.disposeBag)
+
         }).disposed(by: disposeBag)
     }
 }

@@ -1,38 +1,42 @@
 //
-//  YTTabBarControllerViewModel.swift
+//  AppFlowCoordinator.swift
 //  YalantisTest
 //
-//  Created by Vitaliy Yefimchuk on 26.11.2021.
+//  Created by Vitaliy Yefimchuk on 20.12.2021.
 //
 
 import UIKit
 
-final class YTTabBarControllerViewModel {
+final class AppFlowCoordinator: NavigationNode, FlowCoordinator {
+    
+    weak var containerViewController: UIViewController?
     
     let answerDependencyManager: AnswerDependencyManager
     let secureStorage: SecureStorage
     let dbService: DBServiceProtocol
     let settingsService: SettingsServiceProtocol
     
-    init(answerDependencyManager: AnswerDependencyManager, secureStorage: SecureStorage, dbService: DBServiceProtocol, settingsService: SettingsServiceProtocol) {
+    init(parent: NavigationNode?, answerDependencyManager: AnswerDependencyManager, secureStorage: SecureStorage, dbService: DBServiceProtocol, settingsService: SettingsServiceProtocol) {
         self.answerDependencyManager = answerDependencyManager
         self.secureStorage = secureStorage
         self.dbService = dbService
         self.settingsService = settingsService
+        super.init(parent: parent)
+        
     }
     
-    func buildViewControllers() -> [UIViewController] {
-        return [createMagickBallNC(), createHistoryNC(), createSettingsNC()]
+    func createFlow() -> UIViewController {
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.tintColor = .systemRed
+        tabBarController.viewControllers = [createMagickBallNC(), createHistoryNC(), createSettingsNC()]
+        return tabBarController
     }
     
     // MARK: - MagicBall
     private func createMagickBallNC() -> UINavigationController {
-        let dependencyManager = answerDependencyManager
-        let secureStorage = secureStorage
-        let dbService = dbService
-        let model = BallModel(answerDependencyManager: dependencyManager, secureStorage: secureStorage, dbService: dbService)
-        let viewModel = BallViewModel(model: model)
-        let magicBallVC = MagicBallVC(viewModel: viewModel)
+        
+        let magicBallCoordinator = MagicBallCoordinator(parent: self, answerDependencyManager: answerDependencyManager, answerProvider: answerDependencyManager.currentService, secureStorage: secureStorage, dbService: dbService)
+        let magicBallVC = magicBallCoordinator.createFlow()
         
         magicBallVC.tabBarItem = UITabBarItem(title: L10n.Titles.magicBall,
                                               image: SFSymbols.questionmark,
@@ -43,10 +47,8 @@ final class YTTabBarControllerViewModel {
     
     // MARK: - History
     private func createHistoryNC() -> UINavigationController {
-        let dbService = dbService
-        let model = HistoryModel(dbService: dbService)
-        let viewModel = HistoryViewModel(model: model)
-        let historyVC = HistoryVC(viewModel: viewModel)
+        let historyCoordinator = HistoryFlowCoordinator(parent: self, storage: dbService)
+        let historyVC = historyCoordinator.createFlow()
         
         historyVC.title = L10n.Titles.history
         historyVC.tabBarItem = UITabBarItem(title: L10n.Titles.history, image: SFSymbols.bookClosed, tag: 1)
@@ -56,10 +58,9 @@ final class YTTabBarControllerViewModel {
     
     // MARK: - Settings
     private func createSettingsNC() -> UINavigationController {
-        let settingsProvider = settingsService
-        let model = SettingsModel(settingsProvider: settingsProvider)
-        let viewModel = SettingsViewModel(model: model)
-        let settingsVC = SettingsVC(viewModel: viewModel)
+        let settingsCoordinator = SettingsCoordinator(parent: self, settingsProvider: settingsService)
+        let settingsVC = settingsCoordinator.createFlow()
+        
         settingsVC.title = L10n.Titles.settings
         settingsVC.tabBarItem = UITabBarItem(title: L10n.Titles.settings,
                                              image: SFSymbols.gearshape,
