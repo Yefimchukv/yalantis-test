@@ -7,13 +7,14 @@
 
 import UIKit
 import CoreData
+import RxSwift
 
 protocol DBServiceProtocol {
     func saveData(answer: PresentableAnswer)
     
     func loadData() -> [SavedAnswer]
     
-    func deleteData(for indexPath: Int)
+    func deleteData(for indexPath: Int) -> Observable<Void>
     
     func subscribeOnEventsForDB()
 }
@@ -66,12 +67,14 @@ class CoreDataService: DBServiceProtocol {
     }
     
     // MARK: - Delete
-    func deleteData(for indexPath: Int) {
-        backgroundContext.performAndWait {
+    func deleteData(for indexPath: Int) -> Observable<Void> {
+        backgroundContext.performAndWait { () -> Observable<Void> in
             let items = loadData()
             backgroundContext.delete(items[indexPath])
             
             saveContext()
+            
+            return .just(())
         }
     }
     

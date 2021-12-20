@@ -1,24 +1,38 @@
 PODS:
   - KeychainSwift (19.0.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
   - SwiftGen (6.5.1)
   - SwiftLint (0.45.1)
 
 DEPENDENCIES:
   - KeychainSwift (~> 19.0)
+  - RxCocoa (~> 6.2.0)
+  - RxSwift (~> 6.2.0)
   - SwiftGen (~> 6.0)
   - SwiftLint (~> 0.45)
 
 SPEC REPOS:
   trunk:
     - KeychainSwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SwiftGen
     - SwiftLint
 
 SPEC CHECKSUMS:
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   SwiftGen: a6d22010845f08fe18fbdf3a07a8e380fd22e0ea
   SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
 
-PODFILE CHECKSUM: 1bae582c48261407a2191d9c9c835321d115a178
+PODFILE CHECKSUM: d4ff5f680774999ae6836b9023ee9245ad4d35d8
 
 COCOAPODS: 1.10.1

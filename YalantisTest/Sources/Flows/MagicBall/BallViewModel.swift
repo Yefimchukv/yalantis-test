@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 final class BallViewModel {
     
@@ -15,9 +16,8 @@ final class BallViewModel {
         self.model = model
     }
     
-    func fetchAnswer() async throws -> PresentableAnswer {
-        let answerModel = try await model.fetchAnswer()
-        return answerModel.toPresentableAnswer()
+    func fetchAnswer() -> Observable<PresentableAnswer> {
+        model.fetchAnswer().map { $0.toPresentableAnswer() }
     }
     
     func refreshAnswerProvider() {
@@ -34,9 +34,8 @@ final class BallViewModel {
         model.saveCounterValue(of: "\(Int(value)! + 1)", with: key)
     }
     
-    func loadValue(with key: String) -> PresentableKeychainValue {
-        let value = model.loadValue(with: key)
-        return value.toPresentableKeychainValue()
+    func loadValue(with key: String) -> Observable<PresentableKeychainValue> {
+        model.loadValue(with: key).map { $0.toPresentableKeychainValue() }
     }
     
     func resetValue(with key: String) {

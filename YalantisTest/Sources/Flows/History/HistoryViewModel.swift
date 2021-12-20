@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import RxSwift
 
 final class HistoryViewModel {
     
     var items: [SavedAnswer] = []
     
     private let model: HistoryModel
+    
+    private let disposeBag = DisposeBag()
     
     init(model: HistoryModel) {
         self.model = model
@@ -21,7 +24,7 @@ final class HistoryViewModel {
         items = model.loadData()
     }
     
-    func deleteData(for indexPath: Int) {
+    func deleteData(for indexPath: Int) -> Observable<Void> {
         model.deleteData(for: indexPath)
     }
     
